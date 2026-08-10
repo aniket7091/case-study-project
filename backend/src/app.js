@@ -1,7 +1,8 @@
 const express = require("express");
-const supabase = require("./config/database");
+const { supabase } = require("./config/database");
 const customerRoutes = require("./routes/customer.routes");
 const productRoutes = require("./routes/product.routes");
+const challanRoutes = require("./routes/challan.routes");
 
 const app = express();
 
@@ -43,6 +44,8 @@ app.get("/health", async (req, res) => {
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/customers", customerRoutes); // for the customer CRM Module
 app.use("/api/products", productRoutes); // Product & Inventory
+app.use("/api/challans", challanRoutes); //for challan module
+
 
 // 404 Fallback
 app.use((req, res) => {

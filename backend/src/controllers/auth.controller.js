@@ -1,4 +1,4 @@
-const supabase = require("../config/database");
+const { supabase } = require("../config/database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { sendSuccess, sendError } = require("../utils/response");
