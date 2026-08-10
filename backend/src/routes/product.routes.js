@@ -5,12 +5,13 @@ const router = express.Router();
 const productController =
     require("../controllers/product.controller");
 
-const { protect } =
-    require("../middleware/auth.middleware");
+const { protect } = require("../middleware/auth.middleware");
+const { authorizeRoles } = require("../middleware/role.middleware");
 
 
-// All product/inventory APIs require login
+// All product and inventory APIs require authentication and ADMIN role
 router.use(protect);
+router.use(authorizeRoles("ADMIN"));
 
 
 

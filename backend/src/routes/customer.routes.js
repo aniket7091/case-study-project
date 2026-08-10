@@ -8,9 +8,13 @@ const customerController =
 const { protect } =
     require("../middleware/auth.middleware");
 
+const { authorizeRoles } = 
+    require("../middleware/role.middleware");
 
-// All customer APIs require authentication
+
+// All customer APIs require authentication and ADMIN role
 router.use(protect);
+router.use(authorizeRoles("ADMIN"));
 
 
 // Create customer

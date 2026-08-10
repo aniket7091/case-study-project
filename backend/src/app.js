@@ -3,6 +3,8 @@ const { supabase } = require("./config/database");
 const customerRoutes = require("./routes/customer.routes");
 const productRoutes = require("./routes/product.routes");
 const challanRoutes = require("./routes/challan.routes");
+const userRoutes = require("./routes/user.routes");
+const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
@@ -42,9 +44,11 @@ app.get("/health", async (req, res) => {
 
 //API Routes
 app.use("/api/auth", require("./routes/auth.routes"));
-app.use("/api/customers", customerRoutes); // for the customer CRM Module
+app.use("/api/users", userRoutes);       // Admin user management
+app.use("/api/admin", adminRoutes);      // Admin dashboard
+app.use("/api/customers", customerRoutes); // Customer CRM Module
 app.use("/api/products", productRoutes); // Product & Inventory
-app.use("/api/challans", challanRoutes); //for challan module
+app.use("/api/challans", challanRoutes); // Challan module
 
 
 // 404 Fallback

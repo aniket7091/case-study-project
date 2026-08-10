@@ -5,8 +5,8 @@ const router = express.Router();
 const challanController =
     require("../controllers/challan.controller");
 
-const { protect } =
-    require("../middleware/auth.middleware");
+const { protect } = require("../middleware/auth.middleware");
+const { authorizeRoles } = require("../middleware/role.middleware");
 
 
 
@@ -14,6 +14,7 @@ const { protect } =
 
 
 router.use(protect);
+router.use(authorizeRoles("ADMIN"));
 
 
 
