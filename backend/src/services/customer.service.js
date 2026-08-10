@@ -90,7 +90,7 @@ const getCustomers = async ({
     };
 };
 
-
+//creating service of get Customer by id
 const getCustomerById = async (customerId) => {
 
     const { data, error } = await supabase

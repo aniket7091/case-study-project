@@ -149,6 +149,13 @@ const addFollowUp = async (req, res) => {
 
     try {
 
+        if (!req.body) {
+            return res.status(400).json({
+                success: false,
+                message: "Request body is missing. Ensure Content-Type is set to application/json."
+            });
+        }
+
         const {
             note,
             follow_up_date

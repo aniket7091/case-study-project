@@ -1,14 +1,15 @@
 const express = require("express");
 const supabase = require("./config/database");
 const customerRoutes = require("./routes/customer.routes");
+const productRoutes = require("./routes/product.routes");
 
 const app = express();
 
-// ── Core Middleware ────────────────────────────────────────────────────────────
+// Core Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Health Check — also verifies Supabase connectivity ────────────────────────
+// Health Check — also verifies Supabase connectivity
 app.get("/health", async (req, res) => {
   try {
     const { data, error } = await supabase.rpc("get_service_status").maybeSingle();
@@ -38,11 +39,12 @@ app.get("/health", async (req, res) => {
   }
 });
 
-// ── API Routes ─────────────────────────────────────────────────────────────────
+//API Routes
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/customers", customerRoutes); // for the customer CRM Module
+app.use("/api/products", productRoutes); // Product & Inventory
 
-// ── 404 Fallback ───────────────────────────────────────────────────────────────
+// 404 Fallback
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.method} ${req.originalUrl} not found.` });
 });
