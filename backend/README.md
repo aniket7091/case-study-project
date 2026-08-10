@@ -83,7 +83,7 @@ docker run -p 3000:3000 --env-file .env case-study-backend
 
 ## 📚 API Reference
 
-> **Base URL:** `http://localhost:3000`  
+> **Base URL:** `https://case-study-backend-3cb3.onrender.com`  
 > **Auth:** All protected routes require `Authorization: Bearer <token>` header.
 
 ### 🔐 Auth APIs
