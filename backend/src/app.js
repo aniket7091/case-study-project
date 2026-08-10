@@ -3,21 +3,16 @@ const supabase = require("./config/database");
 
 const app = express();
 
-// Middleware
+// ── Core Middleware ────────────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health check — also verifies Supabase connectivity
+// ── Health Check — also verifies Supabase connectivity ────────────────────────
 app.get("/health", async (req, res) => {
   try {
-    // Use a raw SQL ping — works on any Supabase project regardless of schema
     const { data, error } = await supabase.rpc("get_service_status").maybeSingle();
 
-    // If RPC doesn't exist, fall back: any non-network error still proves connectivity
-
     if (error && (error.code === "PGRST202" || error.message?.includes("Could not find"))) {
-      // RPC not defined — but the round-trip worked, connection is alive
-
       return res.json({
         success: true,
         message: "Backend is running",
@@ -42,5 +37,12 @@ app.get("/health", async (req, res) => {
   }
 });
 
-// Export app (routes will be added here)
+// ── API Routes ─────────────────────────────────────────────────────────────────
+app.use("/api/auth", require("./routes/auth.routes"));
+
+// ── 404 Fallback ───────────────────────────────────────────────────────────────
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: `Route ${req.method} ${req.originalUrl} not found.` });
+});
+
 module.exports = app;
