@@ -121,10 +121,14 @@ const LoginPage = () => {
 
     } catch (err) {
 
-      setError(
-        err.message ||
-        "Something went wrong. Please try again."
-      );
+      if (err.name === "TypeError" && err.message === "Failed to fetch") {
+        setError("Unable to reach server. Check your internet connection.");
+      } else {
+        setError(
+          err.message ||
+          "Something went wrong. Please try again."
+        );
+      }
 
     } finally {
 
@@ -249,19 +253,6 @@ const LoginPage = () => {
 
         <div className="login-container">
 
-          {/* Mobile brand */}
-
-          <div className="mobile-login-brand">
-
-            <div className="login-logo">
-              T
-            </div>
-
-            <span>
-              TradeFlow
-            </span>
-
-          </div>
 
 
           <div className="login-header">

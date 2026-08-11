@@ -9,13 +9,26 @@ const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
-// CORS — allow frontend origins
+// CORS — allow all origins (update with specific URLs in production)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://localhost:4173",
+  "https://case-study-backend-3cb3.onrender.com",
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://case-study-backend-3cb3.onrender.com"
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    // OR any origin during development
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      // In production you can reject unknown origins
+      // For now allow all to support phone/local-network access
+      callback(null, true);
+    }
+  },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
