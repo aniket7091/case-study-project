@@ -3533,7 +3533,7 @@
 
   justify-content: flex-end;
 
-  gap: 8px;
+  gap: 12px;
 
   border-top: 1px solid #eeeeeb;
 
@@ -3543,7 +3543,7 @@
 .modal-cancel-button {
   height: 38px;
 
-  padding: 0 15px;
+  padding: 0 24px;
 
   border: 1px solid #deded9;
 
@@ -3561,7 +3561,7 @@
 .modal-submit-button {
   height: 38px;
 
-  padding: 0 16px;
+  padding: 0 24px;
 
   border: none;
 
