@@ -9,6 +9,7 @@ const DashboardPage = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL || "https://case-study-backend-3cb3.onrender.com/api";
 
@@ -131,11 +132,19 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-page">
 
+      {/* Mobile overlay backdrop */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* 
           SIDEBAR
        */}
 
-      <aside className="dashboard-sidebar-main">
+      <aside className={`dashboard-sidebar-main${sidebarOpen ? " sidebar-open" : ""}`}>
 
         <div className="dashboard-brand">
 
@@ -160,6 +169,7 @@ const DashboardPage = () => {
 
           <button
             className="dashboard-nav-item active"
+            onClick={() => setSidebarOpen(false)}
           >
             <span className="nav-item-icon">
               ◉
@@ -171,9 +181,7 @@ const DashboardPage = () => {
 
           <button
             className="dashboard-nav-item"
-            onClick={() =>
-              navigate("/customers")
-            }
+            onClick={() => { navigate("/customers"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
               ◎
@@ -185,9 +193,7 @@ const DashboardPage = () => {
 
           <button
             className="dashboard-nav-item"
-            onClick={() =>
-              navigate("/products")
-            }
+            onClick={() => { navigate("/products"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
               ◇
@@ -199,9 +205,7 @@ const DashboardPage = () => {
 
           <button
             className="dashboard-nav-item"
-            onClick={() =>
-              navigate("/inventory")
-            }
+            onClick={() => { navigate("/inventory"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
               ▣
@@ -213,9 +217,7 @@ const DashboardPage = () => {
 
           <button
             className="dashboard-nav-item"
-            onClick={() =>
-              navigate("/challans")
-            }
+            onClick={() => { navigate("/challans"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
               ≡
@@ -312,6 +314,17 @@ const DashboardPage = () => {
         {/* Header */}
 
         <header className="dashboard-header">
+
+          {/* Hamburger — visible only on mobile */}
+          <button
+            className="hamburger-btn"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle navigation"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
 
           <div>
 
