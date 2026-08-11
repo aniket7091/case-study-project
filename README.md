@@ -10,13 +10,12 @@ TradeFlow is a comprehensive web-based Enterprise Resource Planning (ERP) and Cu
 ### Test Login Credentials
 | Role | Email | Password |
 |------|-------|----------|
-| **Admin** | `warehouse@test.com` (Note: seeded as admin in DB, please check your DB) or `admin@test.com` | `password123` |
+| **Admin** | `aniketkumar7091315698@gmail.com`  | `Aniket@123` |
 | **Sales** | `sales@test.com` | `password123` |
 | **Warehouse** | `warehouse@test.com` | `password123` |
 | **Accounts** | `accounts@test.com` | `password123` |
 
 
-*(Note: Replace with actual credentials if different during manual seeding)*
 
 ---
 
