@@ -4,6 +4,7 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CustomersPage from "./pages/CustomersPage";
 import {
   BrowserRouter,
   Routes,
@@ -28,12 +29,14 @@ function App() {
 
         {/* for the login page */}
         <Route path="/login" element={<LoginPage />} />
-        
+
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />}/>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/customers" element={<CustomersPage />} />
 
         </Route>
+        
 
 
 

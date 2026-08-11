@@ -75,7 +75,7 @@ const DashboardPage = () => {
         if (!response.ok) {
           throw new Error(
             data.message ||
-              "Unable to load dashboard"
+            "Unable to load dashboard"
           );
         }
 
@@ -91,7 +91,7 @@ const DashboardPage = () => {
 
       setError(
         err.message ||
-          "Unable to load dashboard data."
+        "Unable to load dashboard data."
       );
 
     } finally {
@@ -283,32 +283,6 @@ const DashboardPage = () => {
             </>
           )}
 
-          <p className="nav-section-title second">
-            ACCOUNT
-          </p>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={handleLogout}
-          >
-            <span className="nav-item-icon">
-              ↪
-            </span>
-
-            Logout
-          </button>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={() => navigate("/")}
-          >
-            <span className="nav-item-icon">
-              ←
-            </span>
-
-            Back to Home
-          </button>
-
         </nav>
 
 
@@ -335,6 +309,18 @@ const DashboardPage = () => {
             </div>
 
           </div>
+
+
+          <button
+            className="logout-button"
+            onClick={handleLogout}
+          >
+            <span>
+              ↪
+            </span>
+
+            Logout
+          </button>
 
         </div>
 
@@ -621,34 +607,34 @@ const DashboardPage = () => {
             {(getRole() === "ADMIN" ||
               getRole() === "SALES") && (
 
-              <button
-                className="quick-action-card"
-                onClick={() =>
-                  navigate("/customers")
-                }
-              >
+                <button
+                  className="quick-action-card"
+                  onClick={() =>
+                    navigate("/customers")
+                  }
+                >
 
-                <div className="quick-action-icon">
-                  ◎
-                </div>
+                  <div className="quick-action-icon">
+                    ◎
+                  </div>
 
-                <div>
-                  <h3>
-                    Manage Customers
-                  </h3>
+                  <div>
+                    <h3>
+                      Manage Customers
+                    </h3>
 
-                  <p>
-                    Add and manage customer
-                    relationships.
-                  </p>
-                </div>
+                    <p>
+                      Add and manage customer
+                      relationships.
+                    </p>
+                  </div>
 
-                <span>
-                  →
-                </span>
+                  <span>
+                    →
+                  </span>
 
-              </button>
-            )}
+                </button>
+              )}
 
 
             {/* Products */}
@@ -656,33 +642,33 @@ const DashboardPage = () => {
             {(getRole() === "ADMIN" ||
               getRole() === "WAREHOUSE") && (
 
-              <button
-                className="quick-action-card"
-                onClick={() =>
-                  navigate("/products")
-                }
-              >
+                <button
+                  className="quick-action-card"
+                  onClick={() =>
+                    navigate("/products")
+                  }
+                >
 
-                <div className="quick-action-icon">
-                  ◇
-                </div>
+                  <div className="quick-action-icon">
+                    ◇
+                  </div>
 
-                <div>
-                  <h3>
-                    Manage Products
-                  </h3>
+                  <div>
+                    <h3>
+                      Manage Products
+                    </h3>
 
-                  <p>
-                    Manage products and pricing.
-                  </p>
-                </div>
+                    <p>
+                      Manage products and pricing.
+                    </p>
+                  </div>
 
-                <span>
-                  →
-                </span>
+                  <span>
+                    →
+                  </span>
 
-              </button>
-            )}
+                </button>
+              )}
 
 
             {/* Inventory */}
@@ -690,33 +676,33 @@ const DashboardPage = () => {
             {(getRole() === "ADMIN" ||
               getRole() === "WAREHOUSE") && (
 
-              <button
-                className="quick-action-card"
-                onClick={() =>
-                  navigate("/inventory")
-                }
-              >
+                <button
+                  className="quick-action-card"
+                  onClick={() =>
+                    navigate("/inventory")
+                  }
+                >
 
-                <div className="quick-action-icon">
-                  ▣
-                </div>
+                  <div className="quick-action-icon">
+                    ▣
+                  </div>
 
-                <div>
-                  <h3>
-                    Inventory
-                  </h3>
+                  <div>
+                    <h3>
+                      Inventory
+                    </h3>
 
-                  <p>
-                    Track stock and movements.
-                  </p>
-                </div>
+                    <p>
+                      Track stock and movements.
+                    </p>
+                  </div>
 
-                <span>
-                  →
-                </span>
+                  <span>
+                    →
+                  </span>
 
-              </button>
-            )}
+                </button>
+              )}
 
 
             {/* Challans */}
@@ -724,33 +710,33 @@ const DashboardPage = () => {
             {(getRole() === "ADMIN" ||
               getRole() === "SALES") && (
 
-              <button
-                className="quick-action-card"
-                onClick={() =>
-                  navigate("/challans")
-                }
-              >
+                <button
+                  className="quick-action-card"
+                  onClick={() =>
+                    navigate("/challans")
+                  }
+                >
 
-                <div className="quick-action-icon">
-                  ≡
-                </div>
+                  <div className="quick-action-icon">
+                    ≡
+                  </div>
 
-                <div>
-                  <h3>
-                    Sales Challans
-                  </h3>
+                  <div>
+                    <h3>
+                      Sales Challans
+                    </h3>
 
-                  <p>
-                    Create and manage challans.
-                  </p>
-                </div>
+                    <p>
+                      Create and manage challans.
+                    </p>
+                  </div>
 
-                <span>
-                  →
-                </span>
+                  <span>
+                    →
+                  </span>
 
-              </button>
-            )}
+                </button>
+              )}
 
           </div>
 
@@ -903,4 +889,5 @@ const DashboardPage = () => {
   );
 };
 
+export default DashboardPage;
 export default DashboardPage;

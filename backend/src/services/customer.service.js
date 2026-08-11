@@ -62,11 +62,14 @@ const getCustomers = async ({
     }
 
     if (status) {
-        query = query.eq("status", status);
+        query = query.eq("status", status.toUpperCase());
     }
 
     if (customer_type) {
-        query = query.eq("customer_type", customer_type);
+        query = query.eq(
+            "customer_type",
+            customer_type.toUpperCase()
+        );
     }
 
     query = query
