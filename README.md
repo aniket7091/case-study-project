@@ -2,7 +2,7 @@
 
 TradeFlow is a comprehensive web-based Enterprise Resource Planning (ERP) and Customer Relationship Management (CRM) system designed to streamline business operations, inventory management, customer tracking, and sales (challan) generation.
 
-## 🚀 Live Demo
+## Live Demo
 
 - **Frontend URL:** [TradeFlow Frontend (Vercel/Netlify/Local)] *(Add your frontend URL here if deployed)*
 - **Backend API URL:** `https://case-study-backend-3cb3.onrender.com/api`
@@ -18,7 +18,7 @@ TradeFlow is a comprehensive web-based Enterprise Resource Planning (ERP) and Cu
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 The project follows a standard **Client-Server Architecture**:
 1. **Frontend (Client):** Built with React.js (Create React App/Vite). It handles the user interface, routing (react-router-dom), and state management. The UI uses custom CSS variables for consistent theming and `react-icons` (Material Design) for iconography.
@@ -27,7 +27,7 @@ The project follows a standard **Client-Server Architecture**:
 
 ---
 
-## 🛠️ Setup and Deployment Instructions
+##  Setup and Deployment Instructions
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -87,7 +87,7 @@ npm start
 
 ---
 
-## 📚 API Documentation
+##  API Documentation
 
 All API endpoints are prefixed with `/api`. Authentication is handled via JWT Bearer tokens in the `Authorization` header.
 
@@ -116,7 +116,7 @@ All API endpoints are prefixed with `/api`. Authentication is handled via JWT Be
 
 ---
 
-## 💡 Assumptions Made
+##  Assumptions Made
 
 1. **Role-Based Access Control (RBAC):** It is assumed that roles (`ADMIN`, `SALES`, `WAREHOUSE`) are strictly enforced at both the UI routing level and the Backend middleware level.
 2. **Supabase Setup:** Assumed that the Supabase database schema (tables for `users`, `customers`, `products`, `challans`, `challan_items`) is already defined and intact.
@@ -125,7 +125,7 @@ All API endpoints are prefixed with `/api`. Authentication is handled via JWT Be
 
 ---
 
-## ⚠️ Known Limitations or Incomplete Parts
+##  Known Limitations or Incomplete Parts
 
 - **Password Reset:** The "Forgot Password" flow is currently not implemented on the backend.
 - **Server-Side PDF Generation:** Invoices are generated on the client-side. A robust enterprise solution might eventually require server-side PDF generation for strict archiving and email attachments.
