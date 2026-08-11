@@ -11,58 +11,45 @@ const { authorizeRoles } = require("../middleware/role.middleware");
 
 
 // Authentication required for all challan APIs
-// ADMIN and SALES can access all challan routes
-
 router.use(protect);
-router.use(authorizeRoles("ADMIN", "SALES"));
 
 
-
-// CREATE
-
-
+// CREATE (ADMIN + SALES)
 router.post(
     "/",
+    authorizeRoles("ADMIN", "SALES"),
     challanController.createChallan
 );
 
 
-
-// GET ALL
-
-
+// GET ALL (ADMIN + SALES + ACCOUNTS)
 router.get(
     "/",
+    authorizeRoles("ADMIN", "SALES", "ACCOUNTS"),
     challanController.getChallans
 );
 
 
-
-// GET SINGLE
-
-
+// GET SINGLE (ADMIN + SALES + ACCOUNTS)
 router.get(
     "/:id",
+    authorizeRoles("ADMIN", "SALES", "ACCOUNTS"),
     challanController.getChallanById
 );
 
 
-
-// CONFIRM
-
-
+// CONFIRM (ADMIN + SALES)
 router.patch(
     "/:id/confirm",
+    authorizeRoles("ADMIN", "SALES"),
     challanController.confirmChallan
 );
 
 
-
-// CANCEL
-
-
+// CANCEL (ADMIN + SALES)
 router.patch(
     "/:id/cancel",
+    authorizeRoles("ADMIN", "SALES"),
     challanController.cancelChallan
 );
 

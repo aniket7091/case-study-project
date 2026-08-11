@@ -12,42 +12,46 @@ const { authorizeRoles } =
     require("../middleware/role.middleware");
 
 
-// All customer APIs require authentication and ADMIN or SALES role
+// All customer APIs require authentication
 router.use(protect);
-router.use(authorizeRoles("ADMIN", "SALES"));
 
 
-// Create customer
+// Create customer (ADMIN + SALES)
 router.post(
     "/",
+    authorizeRoles("ADMIN", "SALES"),
     customerController.createCustomer
 );
 
 
-// Get all customers
+// Get all customers (ADMIN + SALES + ACCOUNTS)
 router.get(
     "/",
+    authorizeRoles("ADMIN", "SALES", "ACCOUNTS"),
     customerController.getCustomers
 );
 
 
-// Get single customer
+// Get single customer (ADMIN + SALES + ACCOUNTS)
 router.get(
     "/:id",
+    authorizeRoles("ADMIN", "SALES", "ACCOUNTS"),
     customerController.getCustomerById
 );
 
 
-// Update customer
+// Update customer (ADMIN + SALES)
 router.put(
     "/:id",
+    authorizeRoles("ADMIN", "SALES"),
     customerController.updateCustomer
 );
 
 
-// Add follow-up
+// Add follow-up (ADMIN + SALES)
 router.post(
     "/:id/followups",
+    authorizeRoles("ADMIN", "SALES"),
     customerController.addFollowUp
 );
 

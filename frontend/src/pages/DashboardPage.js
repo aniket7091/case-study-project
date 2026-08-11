@@ -647,7 +647,9 @@ const DashboardPage = () => {
 
             {/* Products */}
 
-            {getRole() === "ADMIN" && (
+            {(getRole() === "ADMIN" ||
+              getRole() === "WAREHOUSE" ||
+              getRole() === "SALES") && (
 
                 <button
                   className="quick-action-card"

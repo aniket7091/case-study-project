@@ -30,22 +30,30 @@ export const MODULES = {
 const ALL_MODULES = Object.values(MODULES);
 
 export const ROLE_PERMISSIONS = {
+  // ADMIN: full access to everything
   [ROLES.ADMIN]: ALL_MODULES,
+
+  // SALES: manage customers & challans, read-only products (to pick items in challan)
   [ROLES.SALES]: [
     MODULES.DASHBOARD,
     MODULES.CUSTOMERS,
     MODULES.CHALLANS,
+    MODULES.PRODUCTS,
     MODULES.PROFILE
   ],
+
+  // WAREHOUSE: manage products & stock movements, view inventory
   [ROLES.WAREHOUSE]: [
     MODULES.DASHBOARD,
+    MODULES.PRODUCTS,
     MODULES.INVENTORY,
     MODULES.PROFILE
   ],
+
+  // ACCOUNTS: read customers & challans for reconciliation, view reports
   [ROLES.ACCOUNTS]: [
     MODULES.DASHBOARD,
     MODULES.CUSTOMERS,
-    MODULES.PRODUCTS,
     MODULES.CHALLANS,
     MODULES.REPORTS,
     MODULES.PROFILE

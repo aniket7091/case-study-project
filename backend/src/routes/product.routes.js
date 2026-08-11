@@ -25,18 +25,18 @@ router.post(
 );
 
 
-// Get products (ADMIN + WAREHOUSE)
+// Get products (ADMIN + WAREHOUSE + SALES - SALES needs to browse products for challans)
 router.get(
     "/",
-    authorizeRoles("ADMIN", "WAREHOUSE"),
+    authorizeRoles("ADMIN", "WAREHOUSE", "SALES"),
     productController.getProducts
 );
 
 
-// Get single product (ADMIN + WAREHOUSE)
+// Get single product (ADMIN + WAREHOUSE + SALES)
 router.get(
     "/:id",
-    authorizeRoles("ADMIN", "WAREHOUSE"),
+    authorizeRoles("ADMIN", "WAREHOUSE", "SALES"),
     productController.getProductById
 );
 
