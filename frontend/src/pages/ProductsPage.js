@@ -2184,7 +2184,7 @@ const ProductsPage = () => {
               </div>
 
 
-              <div className="customer-form-footer stock-history-footer">
+              <div className="customer-form-footer customer-detail-footer">
 
                 <button
                   className="modal-cancel-button"
