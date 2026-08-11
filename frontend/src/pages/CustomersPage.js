@@ -4,6 +4,11 @@ import SidebarNavigation from "../components/SidebarNavigation";
 import PageHeader from "../components/PageHeader";
 import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import DataListHeader from "../components/DataListHeader";
+import { 
+  getStoredUser, 
+  getStoredRole, 
+  canManageCustomers 
+} from "../config/permissions";
 
 import "../App.css";
 import {
@@ -39,6 +44,7 @@ const CustomersPage = () => {
   // STATE
   // 
 
+  const userRole = getStoredRole();
   const [customers, setCustomers] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -935,17 +941,17 @@ const CustomersPage = () => {
           <div className="sidebar-user-mini">
 
             <div className="sidebar-avatar">
-              A
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
 
               <strong>
-                Admin
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                ADMIN
+                {getStoredUser()?.role || "STAFF"}
               </span>
 
             </div>
@@ -984,12 +990,14 @@ const CustomersPage = () => {
           actions={
             <>
               <button className="notification-button">♢</button>
-              <button
-                className="customer-add-button"
-                onClick={openAddCustomer}
-              >
-                + Add customer
-              </button>
+              {canManageCustomers(userRole) && (
+                <button
+                  className="customer-add-button"
+                  onClick={openAddCustomer}
+                >
+                  + Add customer
+                </button>
+              )}
             </>
           }
         />
@@ -1345,28 +1353,32 @@ const CustomersPage = () => {
                               View
                             </button>
 
-                            <button
-                              title="Edit customer"
-                              onClick={() =>
-                                openEditCustomer(
-                                  customer
-                                )
-                              }
-                            >
-                              Edit
-                            </button>
+                            {canManageCustomers(userRole) && (
+                              <>
+                                <button
+                                  onClick={() =>
+                                    openEditCustomer(
+                                      customer
+                                    )
+                                  }
+                                >
+                                  Edit
+                                </button>
+                              </>
+                            )}
 
-                            <button
-                              title="Add follow-up"
-                              onClick={() =>
-                                openFollowup(
-                                  customer
-                                )
-                              }
-                            >
-                              Follow-up
-                            </button>
-
+                            {canManageCustomers(userRole) && (
+                              <button
+                                title="Add follow-up"
+                                onClick={() =>
+                                  openFollowup(
+                                    customer
+                                  )
+                                }
+                              >
+                                Follow-up
+                              </button>
+                            )}
                           </div>
 
                         </td>

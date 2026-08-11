@@ -4,6 +4,11 @@ import SidebarNavigation from "../components/SidebarNavigation";
 import PageHeader from "../components/PageHeader";
 import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import DataListHeader from "../components/DataListHeader";
+import { 
+  getStoredUser, 
+  getStoredRole, 
+  canManageChallans 
+} from "../config/permissions";
 
 import "../App.css";
 import {
@@ -39,6 +44,7 @@ const ChallansPage = () => {
   // CHALLANS
   // 
 
+  const userRole = getStoredRole();
   const [challans, setChallans] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -1632,17 +1638,17 @@ const ChallansPage = () => {
           <div className="sidebar-user-mini">
 
             <div className="sidebar-avatar">
-              A
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
 
               <strong>
-                Admin
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                ADMIN
+                {getStoredUser()?.role || "STAFF"}
               </span>
 
             </div>
@@ -1681,12 +1687,14 @@ const ChallansPage = () => {
           actions={
             <>
               <button className="notification-button">♢</button>
-              <button
-                className="customer-add-button"
-                onClick={openCreateModal}
-              >
-                + Create challan
-              </button>
+              {canManageChallans(userRole) && (
+                <button
+                  className="customer-add-button"
+                  onClick={openCreateModal}
+                >
+                  + Create challan
+                </button>
+              )}
             </>
           }
         />
@@ -2004,34 +2012,31 @@ const ChallansPage = () => {
                             </button>
 
 
-                            {challan.status ===
+                            {canManageChallans(userRole) && challan.status ===
                               "DRAFT" && (
 
-                              <button
-                                onClick={() =>
-                                  confirmChallan(
-                                    challan.id
-                                  )
-                                }
-                              >
-                                Confirm
-                              </button>
+                              <>
+                                <button
+                                  onClick={() =>
+                                    confirmChallan(
+                                      challan.id
+                                    )
+                                  }
+                                >
+                                  Confirm
+                                </button>
 
-                            )}
 
-
-                            {challan.status ===
-                              "DRAFT" && (
-
-                              <button
-                                onClick={() =>
-                                  cancelChallan(
-                                    challan.id
-                                  )
-                                }
-                              >
-                                Cancel
-                              </button>
+                                <button
+                                  onClick={() =>
+                                    cancelChallan(
+                                      challan.id
+                                    )
+                                  }
+                                >
+                                  Cancel
+                                </button>
+                              </>
 
                             )}
 

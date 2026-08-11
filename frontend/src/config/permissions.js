@@ -98,3 +98,10 @@ export const getStoredRole = () => {
 
 export const canAccess = (role, module) =>
   ROLE_PERMISSIONS[role]?.includes(module) || false;
+
+export const canManageCustomers = (role) => [ROLES.ADMIN, ROLES.SALES].includes(role);
+export const canManageProducts = (role) => [ROLES.ADMIN].includes(role);
+export const canUpdateStock = (role) => [ROLES.ADMIN, ROLES.WAREHOUSE].includes(role);
+export const canManageChallans = (role) => [ROLES.ADMIN, ROLES.SALES].includes(role);
+export const canManageInventory = (role) => [ROLES.ADMIN, ROLES.WAREHOUSE].includes(role);
+export const canManageUsers = (role) => [ROLES.ADMIN].includes(role);

@@ -4,6 +4,12 @@ import SidebarNavigation from "../components/SidebarNavigation";
 import PageHeader from "../components/PageHeader";
 import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import DataListHeader from "../components/DataListHeader";
+import { 
+  getStoredUser, 
+  getStoredRole, 
+  canManageProducts, 
+  canUpdateStock 
+} from "../config/permissions";
 
 import "../App.css";
 import {
@@ -39,7 +45,10 @@ const ProductsPage = () => {
   // PRODUCTS
   // 
 
-  const [products, setProducts] = useState([]);
+  const userRole = getStoredRole();
+  const [products, setProducts] = useState(
+    []
+  );
 
   const [loading, setLoading] = useState(true);
 
@@ -1002,17 +1011,17 @@ const ProductsPage = () => {
           <div className="sidebar-user-mini">
 
             <div className="sidebar-avatar">
-              A
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
 
               <strong>
-                Admin
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                ADMIN
+                {getStoredUser()?.role || "STAFF"}
               </span>
 
             </div>
@@ -1062,12 +1071,14 @@ const ProductsPage = () => {
           actions={
             <>
               <button className="notification-button">♢</button>
-              <button
-                className="customer-add-button"
-                onClick={openAddProduct}
-              >
-                + Add product
-              </button>
+              {canManageProducts(userRole) && (
+                <button
+                  className="customer-add-button"
+                  onClick={openAddProduct}
+                >
+                  + Add product
+                </button>
+              )}
             </>
           }
         />
@@ -1415,26 +1426,29 @@ const ProductsPage = () => {
 
                           <div className="customer-actions">
 
-                            <button
-                              onClick={() =>
-                                openEditProduct(
-                                  product
-                                )
-                              }
-                            >
-                              Edit
-                            </button>
+                            {canManageProducts(userRole) && (
+                              <button
+                                onClick={() =>
+                                  openEditProduct(
+                                    product
+                                  )
+                                }
+                              >
+                                Edit
+                              </button>
+                            )}
 
-
-                            <button
-                              onClick={() =>
-                                openStockModal(
-                                  product
-                                )
-                              }
-                            >
-                              Stock
-                            </button>
+                            {canUpdateStock(userRole) && (
+                              <button
+                                onClick={() =>
+                                  openStockModal(
+                                    product
+                                  )
+                                }
+                              >
+                                Stock
+                              </button>
+                            )}
 
 
                             <button
