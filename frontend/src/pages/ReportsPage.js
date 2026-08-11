@@ -5,6 +5,12 @@ import {
   MdDashboard, MdPeople, MdInventory2, MdWarehouse,
   MdReceipt, MdSupervisedUserCircle, MdBarChart
 } from "react-icons/md";
+import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
+import ReportCardHeader from "../components/reports/ReportCardHeader";
+import ReportEmptyState from "../components/reports/ReportEmptyState";
+import ReportStatCard from "../components/reports/ReportStatCard";
 
 const ReportsPage = () => {
   const navigate = useNavigate();
@@ -393,7 +399,9 @@ const ReportsPage = () => {
           </span>
         </div>
 
-        <nav className="dashboard-nav">
+        <SidebarNavigation />
+
+        <nav className="legacy-dashboard-nav" aria-hidden="true">
 
           <p className="nav-section-title">
             MAIN
@@ -528,111 +536,53 @@ const ReportsPage = () => {
 
       <main className="dashboard-content">
 
-        <header className="dashboard-header">
-
-          <div>
-            <p className="dashboard-breadcrumb">
-              Analytics / Reports
-            </p>
-
-            <h1>
-              Reports
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Overview of customers, products,
-              inventory and sales challans.
-            </p>
-          </div>
-
-          <button
-            className="report-refresh-button"
-            onClick={fetchReports}
-          >
-            ↻ Refresh
-          </button>
-
-        </header>
+        <PageHeader
+          breadcrumb="Analytics / Reports"
+          title="Reports"
+          subtitle="Overview of customers, products, inventory and sales challans."
+          actions={
+            <button
+              className="report-refresh-button"
+              onClick={fetchReports}
+            >
+              ↻ Refresh
+            </button>
+          }
+        />
 
 
         {/* ERROR */}
 
-        {error && (
-          <div className="dashboard-error">
-            <span>!</span>
-
-            {error}
-
-            <button
-              onClick={() =>
-                setError("")
-              }
-            >
-              ×
-            </button>
-          </div>
-        )}
+        <DashboardErrorAlert
+          message={error}
+          onDismiss={() => setError("")}
+        />
 
 
         {/* KPI CARDS */}
 
         <section className="report-stats-grid">
 
-          <div className="report-stat-card">
-            <span>
-              CUSTOMERS
-            </span>
-
-            <strong>
-              {stats.totalCustomers}
-            </strong>
-
-            <small>
-              {customerStats.active} active
-            </small>
-          </div>
-
-          <div className="report-stat-card">
-            <span>
-              PRODUCTS
-            </span>
-
-            <strong>
-              {stats.totalProducts}
-            </strong>
-
-            <small>
-              {stats.lowStock} low stock
-            </small>
-          </div>
-
-          <div className="report-stat-card">
-            <span>
-              TOTAL STOCK
-            </span>
-
-            <strong>
-              {stats.currentStock}
-            </strong>
-
-            <small>
-              units currently available
-            </small>
-          </div>
-
-          <div className="report-stat-card">
-            <span>
-              CONFIRMED CHALLANS
-            </span>
-
-            <strong>
-              {stats.confirmedChallans}
-            </strong>
-
-            <small>
-              {stats.totalQuantity} units sold
-            </small>
-          </div>
+          <ReportStatCard
+            label="CUSTOMERS"
+            value={stats.totalCustomers}
+            detail={`${customerStats.active} active`}
+          />
+          <ReportStatCard
+            label="PRODUCTS"
+            value={stats.totalProducts}
+            detail={`${stats.lowStock} low stock`}
+          />
+          <ReportStatCard
+            label="TOTAL STOCK"
+            value={stats.currentStock}
+            detail="units currently available"
+          />
+          <ReportStatCard
+            label="CONFIRMED CHALLANS"
+            value={stats.confirmedChallans}
+            detail={`${stats.totalQuantity} units sold`}
+          />
 
         </section>
 
@@ -643,17 +593,10 @@ const ReportsPage = () => {
 
           <div className="report-card">
 
-            <div className="report-card-header">
-              <div>
-                <p>
-                  SALES
-                </p>
-
-                <h2>
-                  Challan summary
-                </h2>
-              </div>
-            </div>
+            <ReportCardHeader
+              eyebrow="SALES"
+              title="Challan summary"
+            />
 
             <div className="report-breakdown">
 
@@ -704,17 +647,10 @@ const ReportsPage = () => {
 
           <div className="report-card">
 
-            <div className="report-card-header">
-              <div>
-                <p>
-                  CRM
-                </p>
-
-                <h2>
-                  Customer overview
-                </h2>
-              </div>
-            </div>
+            <ReportCardHeader
+              eyebrow="CRM"
+              title="Customer overview"
+            />
 
             <div className="report-breakdown">
 
@@ -759,30 +695,18 @@ const ReportsPage = () => {
 
         <section className="report-card">
 
-          <div className="report-card-header">
-
-            <div>
-              <p>
-                INVENTORY
-              </p>
-
-              <h2>
-                Stock by category
-              </h2>
-            </div>
-
-            <span>
-              {categoryReport.length} categories
-            </span>
-
-          </div>
+          <ReportCardHeader
+            eyebrow="INVENTORY"
+            title="Stock by category"
+            meta={`${categoryReport.length} categories`}
+          />
 
 
           {categoryReport.length === 0 ? (
 
-            <div className="report-empty">
+            <ReportEmptyState>
               No product category data available.
-            </div>
+            </ReportEmptyState>
 
           ) : (
 
@@ -857,28 +781,19 @@ const ReportsPage = () => {
 
           <div className="report-card">
 
-            <div className="report-card-header">
-
-              <div>
-                <p>
-                  INVENTORY
-                </p>
-
-                <h2>
-                  Top stock products
-                </h2>
-              </div>
-
-            </div>
+            <ReportCardHeader
+              eyebrow="INVENTORY"
+              title="Top stock products"
+            />
 
 
             <div className="report-simple-list">
 
               {topProducts.length === 0 ? (
 
-                <div className="report-empty">
+                <ReportEmptyState>
                   No products available.
-                </div>
+                </ReportEmptyState>
 
               ) : (
 
@@ -924,28 +839,18 @@ const ReportsPage = () => {
 
           <div className="report-card">
 
-            <div className="report-card-header">
-
-              <div>
-                <p>
-                  SALES
-                </p>
-
-                <h2>
-                  Recent challans
-                </h2>
-              </div>
-
-              <button
-                className="report-link-button"
-                onClick={() =>
-                  navigate("/challans")
-                }
-              >
-                View all
-              </button>
-
-            </div>
+            <ReportCardHeader
+              eyebrow="SALES"
+              title="Recent challans"
+              action={
+                <button
+                  className="report-link-button"
+                  onClick={() => navigate("/challans")}
+                >
+                  View all
+                </button>
+              }
+            />
 
 
             <div className="report-simple-list">
@@ -953,9 +858,9 @@ const ReportsPage = () => {
               {recentChallans.length ===
               0 ? (
 
-                <div className="report-empty">
+                <ReportEmptyState>
                   No challans available.
-                </div>
+                </ReportEmptyState>
 
               ) : (
 

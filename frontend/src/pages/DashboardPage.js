@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import {
   MdDashboard, MdPeople, MdInventory2, MdWarehouse,
   MdReceipt, MdSupervisedUserCircle, MdBarChart,
   MdArrowForward
 } from "react-icons/md";
 import "../App.css";
+
+const DashboardPageHeader = PageHeader;
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -377,90 +381,47 @@ const DashboardPage = () => {
 
         {/* Header */}
 
-        <header className="dashboard-header">
-
-          {/* Hamburger — visible only on mobile */}
-          <button
-            className="hamburger-btn"
-            onClick={() => setSidebarOpen((prev) => !prev)}
-            aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
-          >
-            {sidebarOpen ? (
-              <span className="hamburger-close">✕</span>
-            ) : (
-              <>
-                <span />
-                <span />
-                <span />
-              </>
-            )}
-          </button>
-
-          <div>
-
-            <p className="dashboard-breadcrumb">
-              Overview
-            </p>
-
-            <h1>
-              Good morning, {getUserName()}
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Here's what's happening with your
-              business today.
-            </p>
-
-          </div>
-
-
-          <div className="dashboard-header-right">
-
+        <DashboardPageHeader
+          breadcrumb="Overview"
+          title={`Good morning, ${getUserName()}`}
+          subtitle="Here's what's happening with your business today."
+          leading={
             <button
-              className="notification-button"
-              title="Notifications"
+              className="hamburger-btn"
+              onClick={() => setSidebarOpen((prev) => !prev)}
+              aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
             >
-              ♢
+              {sidebarOpen ? (
+                <span className="hamburger-close">✕</span>
+              ) : (
+                <><span /><span /><span /></>
+              )}
             </button>
-
-
-            <button
-              type="button"
-              className="header-user header-user-desktop profile-link-trigger"
-              onClick={() => navigate("/profile")}
-            >
-
-              <div className="header-avatar">
-                {getUserName()
-                  .charAt(0)
-                  .toUpperCase()}
-              </div>
-
-              <div>
-                <strong>
-                  {getUserName()}
-                </strong>
-
-                <span>
-                  {getRole()}
-                </span>
-              </div>
-
-            </button>
-
-          </div>
-
-        </header>
+          }
+          actions={
+            <>
+              <button className="notification-button" title="Notifications">♢</button>
+              <button
+                type="button"
+                className="header-user header-user-desktop profile-link-trigger"
+                onClick={() => navigate("/profile")}
+              >
+                <div className="header-avatar">
+                  {getUserName().charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <strong>{getUserName()}</strong>
+                  <span>{getRole()}</span>
+                </div>
+              </button>
+            </>
+          }
+        />
 
 
         {/* Error */}
 
-        {error && (
-          <div className="dashboard-error">
-            <span>!</span>
-            {error}
-          </div>
-        )}
+        {React.createElement(DashboardErrorAlert, { message: error })}
 
 
         {/* 

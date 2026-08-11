@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
+import DataListHeader from "../components/DataListHeader";
 
 import "../App.css";
 import {
@@ -947,74 +950,32 @@ const UsersPage = () => {
 
       <main className="dashboard-content">
 
-        <header className="dashboard-header">
-
-          <div>
-
-            <p className="dashboard-breadcrumb">
-              Admin / Users
-            </p>
-
-            <h1>
-              User Management
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Manage users, roles and account
-              status.
-            </p>
-
-          </div>
-
-
-          <div className="dashboard-header-right">
-
-            <button
-              className="notification-button"
-            >
-              ♢
-            </button>
-
-
-            <button
-              className="customer-add-button"
-              onClick={
-                openCreateModal
-              }
-            >
-              + Create user
-            </button>
-
-          </div>
-
-        </header>
+        <PageHeader
+          breadcrumb="Admin / Users"
+          title="User Management"
+          subtitle="Manage users, roles and account status."
+          actions={
+            <>
+              <button className="notification-button">♢</button>
+              <button
+                className="customer-add-button"
+                onClick={openCreateModal}
+              >
+                + Create user
+              </button>
+            </>
+          }
+        />
 
 
         {/* 
             ERROR
          */}
 
-        {error && (
-
-          <div className="dashboard-error">
-
-            <span>
-              !
-            </span>
-
-            {error}
-
-            <button
-              onClick={() =>
-                setError("")
-              }
-            >
-              ×
-            </button>
-
-          </div>
-
-        )}
+        <DashboardErrorAlert
+          message={error}
+          onDismiss={() => setError("")}
+        />
 
 
         {/* 
@@ -1070,26 +1031,11 @@ const UsersPage = () => {
 
         <section className="customer-table-card">
 
-          <div className="customer-table-header">
-
-            <div>
-
-              <p>
-                ACCESS CONTROL
-              </p>
-
-              <h2>
-                Users
-              </h2>
-
-            </div>
-
-            <span>
-              {pagination.total}
-              {" "}users
-            </span>
-
-          </div>
+          <DataListHeader
+            eyebrow="ACCESS CONTROL"
+            title="Users"
+            countLabel={`${pagination.total} users`}
+          />
 
 
           {loading ? (

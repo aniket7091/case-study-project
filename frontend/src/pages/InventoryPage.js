@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
+import DataListHeader from "../components/DataListHeader";
 
 import "../App.css";
 import {
@@ -885,64 +888,22 @@ const InventoryPage = () => {
 
       <main className="dashboard-content">
 
-        <header className="dashboard-header">
-
-          <div>
-
-            <p className="dashboard-breadcrumb">
-              Inventory / Stock
-            </p>
-
-            <h1>
-              Inventory
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Monitor stock levels and manage
-              stock movements.
-            </p>
-
-          </div>
-
-
-          <div className="dashboard-header-right">
-
-            <button
-              className="notification-button"
-            >
-              ♢
-            </button>
-
-          </div>
-
-        </header>
+        {React.createElement(PageHeader, {
+          breadcrumb: "Inventory / Stock",
+          title: "Inventory",
+          subtitle: "Monitor stock levels and manage stock movements.",
+          actions: <button className="notification-button">♢</button>
+        })}
 
 
         {/* 
             ERROR
          */}
 
-        {error && (
-
-          <div className="dashboard-error">
-
-            <span>
-              !
-            </span>
-
-            {error}
-
-            <button
-              onClick={() =>
-                setError("")
-              }
-            >
-              ×
-            </button>
-
-          </div>
-
-        )}
+        <DashboardErrorAlert
+          message={error}
+          onDismiss={() => setError("")}
+        />
 
 
         {/* 
@@ -1112,26 +1073,11 @@ const InventoryPage = () => {
 
         <section className="customer-table-card">
 
-          <div className="customer-table-header">
-
-            <div>
-
-              <p>
-                INVENTORY MANAGEMENT
-              </p>
-
-              <h2>
-                Stock overview
-              </h2>
-
-            </div>
-
-            <span>
-              {pagination.total}
-              {" "}products
-            </span>
-
-          </div>
+          <DataListHeader
+            eyebrow="INVENTORY MANAGEMENT"
+            title="Stock overview"
+            countLabel={`${pagination.total} products`}
+          />
 
 
           {loading ? (

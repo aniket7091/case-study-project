@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
 
 import "../App.css";
 import {
@@ -719,64 +721,22 @@ const ProfilePage = () => {
             HEADER
          */}
 
-        <header className="dashboard-header">
-
-          <div>
-
-            <p className="dashboard-breadcrumb">
-              Account / Profile
-            </p>
-
-            <h1>
-              My Profile
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Manage your account information
-              and security settings.
-            </p>
-
-          </div>
-
-
-          <div className="dashboard-header-right">
-
-            <button
-              className="notification-button"
-            >
-              ♢
-            </button>
-
-          </div>
-
-        </header>
+        <PageHeader
+          breadcrumb="Account / Profile"
+          title="My Profile"
+          subtitle="Manage your account information and security settings."
+          actions={<button className="notification-button">♢</button>}
+        />
 
 
         {/* 
             ERROR
          */}
 
-        {error && (
-
-          <div className="dashboard-error">
-
-            <span>
-              !
-            </span>
-
-            {error}
-
-            <button
-              onClick={() =>
-                setError("")
-              }
-            >
-              ×
-            </button>
-
-          </div>
-
-        )}
+        <DashboardErrorAlert
+          message={error}
+          onDismiss={() => setError("")}
+        />
 
 
         {/* 

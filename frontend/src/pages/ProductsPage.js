@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import PageHeader from "../components/PageHeader";
+import DashboardErrorAlert from "../components/DashboardErrorAlert";
+import DataListHeader from "../components/DataListHeader";
 
 import "../App.css";
 import {
@@ -226,7 +229,7 @@ const ProductsPage = () => {
       if (!response.ok) {
         throw new Error(
           data.message ||
-            "Unable to fetch products."
+          "Unable to fetch products."
         );
       }
 
@@ -289,7 +292,7 @@ const ProductsPage = () => {
 
       setError(
         err.message ||
-          "Unable to load products."
+        "Unable to load products."
       );
 
     } finally {
@@ -544,11 +547,10 @@ const ProductsPage = () => {
       if (!response.ok) {
         throw new Error(
           data.message ||
-            `Unable to ${
-              isEditing
-                ? "update"
-                : "create"
-            } product.`
+          `Unable to ${isEditing
+            ? "update"
+            : "create"
+          } product.`
         );
       }
 
@@ -567,7 +569,7 @@ const ProductsPage = () => {
 
       setError(
         err.message ||
-          "Unable to save product."
+        "Unable to save product."
       );
 
     } finally {
@@ -661,7 +663,7 @@ const ProductsPage = () => {
       if (!response.ok) {
         throw new Error(
           data.message ||
-            "Unable to update stock."
+          "Unable to update stock."
         );
       }
 
@@ -680,7 +682,7 @@ const ProductsPage = () => {
 
       setError(
         err.message ||
-          "Unable to update stock."
+        "Unable to update stock."
       );
 
     } finally {
@@ -741,7 +743,7 @@ const ProductsPage = () => {
       if (!response.ok) {
         throw new Error(
           data.message ||
-            "Unable to fetch stock history."
+          "Unable to fetch stock history."
         );
       }
 
@@ -766,7 +768,7 @@ const ProductsPage = () => {
 
       setError(
         err.message ||
-          "Unable to load stock history."
+        "Unable to load stock history."
       );
 
     } finally {
@@ -1040,89 +1042,45 @@ const ProductsPage = () => {
 
       <main className="dashboard-content">
 
-        <header className="dashboard-header">
-
-          <button
-            className="hamburger-btn"
-            onClick={() => setSidebarOpen((prev) => !prev)}
-            aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
-          >
-            {sidebarOpen ? (
-              <span className="hamburger-close">✕</span>
-            ) : (
-              <>
-                <span />
-                <span />
-                <span />
-              </>
-            )}
-          </button>
-
-          <div>
-
-            <p className="dashboard-breadcrumb">
-              Inventory / Products
-            </p>
-
-            <h1>
-              Products
-            </h1>
-
-            <p className="dashboard-subtitle">
-              Manage products, pricing and stock.
-            </p>
-
-          </div>
-
-
-          <div className="dashboard-header-right">
-
+        <PageHeader
+          breadcrumb="Inventory / Products"
+          title="Products"
+          subtitle="Manage products, pricing and stock."
+          leading={
             <button
-              className="notification-button"
+              className="hamburger-btn"
+              onClick={() => setSidebarOpen((prev) => !prev)}
+              aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
             >
-              ♢
+              {sidebarOpen ? (
+                <span className="hamburger-close">✕</span>
+              ) : (
+                <><span /><span /><span /></>
+              )}
             </button>
-
-
-            <button
-              className="customer-add-button"
-              onClick={
-                openAddProduct
-              }
-            >
-              + Add product
-            </button>
-
-          </div>
-
-        </header>
+          }
+          actions={
+            <>
+              <button className="notification-button">♢</button>
+              <button
+                className="customer-add-button"
+                onClick={openAddProduct}
+              >
+                + Add product
+              </button>
+            </>
+          }
+        />
 
 
         {/* 
             ERROR
          */}
 
-        {error && (
-
-          <div className="dashboard-error">
-
-            <span>
-              !
-            </span>
-
-            {error}
-
-            <button
-              onClick={() =>
-                setError("")
-              }
-            >
-              ×
-            </button>
-
-          </div>
-
-        )}
+        <DashboardErrorAlert
+          message={error}
+          onDismiss={() => setError("")}
+        />
 
 
         {/* 
@@ -1215,26 +1173,11 @@ const ProductsPage = () => {
 
         <section className="customer-table-card">
 
-          <div className="customer-table-header">
-
-            <div>
-
-              <p>
-                PRODUCT & INVENTORY
-              </p>
-
-              <h2>
-                Product list
-              </h2>
-
-            </div>
-
-            <span>
-              {pagination.total}
-              {" "}products
-            </span>
-
-          </div>
+          <DataListHeader
+            eyebrow="PRODUCT & INVENTORY"
+            title="Product list"
+            countLabel={`${pagination.total} products`}
+          />
 
 
           {loading ? (
@@ -1416,11 +1359,11 @@ const ProductsPage = () => {
                             product
                           ) && (
 
-                            <span className="stock-alert">
-                              Low
-                            </span>
+                              <span className="stock-alert">
+                                Low
+                              </span>
 
-                          )}
+                            )}
 
                         </td>
 
@@ -1842,8 +1785,8 @@ const ProductsPage = () => {
                   {submitting
                     ? "Saving..."
                     : editingProduct
-                    ? "Update product"
-                    : "Add product"}
+                      ? "Update product"
+                      : "Add product"}
                 </button>
 
               </div>
@@ -2211,8 +2154,8 @@ const ProductsPage = () => {
 
                                 <span>
                                   By:{" "}
-                                  {createdBy.length > 20 
-                                    ? createdBy.substring(0, 8) + "..." 
+                                  {createdBy.length > 20
+                                    ? createdBy.substring(0, 8) + "..."
                                     : createdBy}
                                 </span>
 
