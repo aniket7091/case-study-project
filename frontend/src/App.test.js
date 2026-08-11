@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import {
+  MODULES,
+  ROLES,
+  canAccess
+} from "./config/permissions";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("role permissions match the RBAC matrix", () => {
+  expect(canAccess(ROLES.ADMIN, MODULES.USERS)).toBe(true);
+  expect(canAccess(ROLES.SALES, MODULES.INVENTORY)).toBe(false);
+  expect(canAccess(ROLES.WAREHOUSE, MODULES.CUSTOMERS)).toBe(false);
+  expect(canAccess(ROLES.ACCOUNTS, MODULES.CHALLANS)).toBe(true);
 });

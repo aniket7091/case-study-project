@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SidebarNavigation from "../components/SidebarNavigation";
 
 import "../App.css";
 
@@ -790,7 +791,7 @@ const CustomersPage = () => {
   // 
 
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page customers-page">
 
       {/* 
           SIDEBAR
@@ -811,7 +812,9 @@ const CustomersPage = () => {
         </div>
 
 
-        <nav className="dashboard-nav">
+        <SidebarNavigation />
+
+        <nav className="legacy-dashboard-nav" aria-hidden="true">
 
           <p className="nav-section-title">
             MAIN

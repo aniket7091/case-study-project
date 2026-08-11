@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SidebarNavigation from "../components/SidebarNavigation";
 import "../App.css";
 
 const DashboardPage = () => {
@@ -146,6 +147,16 @@ const DashboardPage = () => {
 
       <aside className={`dashboard-sidebar-main${sidebarOpen ? " sidebar-open" : ""}`}>
 
+        <button
+          type="button"
+          className="mobile-menu-close"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close menu"
+        >
+          <span aria-hidden="true">✕</span>
+          Close menu
+        </button>
+
         <div className="dashboard-brand">
 
           <div className="dashboard-logo">
@@ -159,7 +170,22 @@ const DashboardPage = () => {
         </div>
 
         {/* Mobile-only profile card inside sidebar */}
-        <div className="sidebar-mobile-profile">
+        <div
+          className="sidebar-mobile-profile profile-link-trigger"
+          onClick={() => {
+            setSidebarOpen(false);
+            navigate("/profile");
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setSidebarOpen(false);
+              navigate("/profile");
+            }
+          }}
+          role="button"
+          tabIndex={0}
+        >
 
           <div className="sidebar-avatar">
             {getUserName().charAt(0).toUpperCase()}
@@ -172,7 +198,10 @@ const DashboardPage = () => {
 
           <button
             className="sidebar-mobile-close"
-            onClick={() => setSidebarOpen(false)}
+            onClick={(event) => {
+              event.stopPropagation();
+              setSidebarOpen(false);
+            }}
             aria-label="Close"
           >
             ✕
@@ -183,7 +212,11 @@ const DashboardPage = () => {
 
         {/* Navigation */}
 
-        <nav className="dashboard-nav">
+        <SidebarNavigation
+          onNavigate={() => setSidebarOpen(false)}
+        />
+
+        <nav className="legacy-dashboard-nav" aria-hidden="true">
 
           <p className="nav-section-title">
             MAIN
@@ -290,7 +323,11 @@ const DashboardPage = () => {
 
         <div className="dashboard-sidebar-bottom">
 
-          <div className="sidebar-user-mini">
+          <button
+            type="button"
+            className="sidebar-user-mini profile-link-trigger"
+            onClick={() => navigate("/profile")}
+          >
 
             <div className="sidebar-avatar">
               {getUserName()
@@ -308,7 +345,7 @@ const DashboardPage = () => {
               </span>
             </div>
 
-          </div>
+          </button>
 
 
           <button
@@ -382,7 +419,11 @@ const DashboardPage = () => {
             </button>
 
 
-            <div className="header-user header-user-desktop">
+            <button
+              type="button"
+              className="header-user header-user-desktop profile-link-trigger"
+              onClick={() => navigate("/profile")}
+            >
 
               <div className="header-avatar">
                 {getUserName()
@@ -400,7 +441,7 @@ const DashboardPage = () => {
                 </span>
               </div>
 
-            </div>
+            </button>
 
           </div>
 

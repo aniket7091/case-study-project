@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SidebarNavigation from "../components/SidebarNavigation";
 
 import "../App.css";
 
@@ -849,7 +850,7 @@ const ProductsPage = () => {
   // 
 
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page products-page">
 
       {sidebarOpen && (
         <div
@@ -877,7 +878,11 @@ const ProductsPage = () => {
         </div>
 
 
-        <nav className="dashboard-nav">
+        {React.createElement(SidebarNavigation, {
+          onNavigate: () => setSidebarOpen(false)
+        })}
+
+        <nav className="legacy-dashboard-nav" aria-hidden="true">
 
           <p className="nav-section-title">
             MAIN
@@ -2232,7 +2237,7 @@ const ProductsPage = () => {
               </div>
 
 
-              <div className="customer-form-footer">
+              <div className="customer-form-footer stock-history-footer">
 
                 <button
                   className="modal-cancel-button"
