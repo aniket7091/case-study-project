@@ -4,6 +4,7 @@ import SidebarNavigation from "../components/SidebarNavigation";
 import PageHeader from "../components/PageHeader";
 import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import DataListHeader from "../components/DataListHeader";
+import { getStoredUser } from "../config/permissions";
 
 import "../App.css";
 import {
@@ -906,19 +907,17 @@ const UsersPage = () => {
           <div className="sidebar-user-mini">
 
             <div className="sidebar-avatar">
-              A
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
 
               <strong>
-                {currentUser?.name ||
-                  "Admin"}
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                {currentUser?.role ||
-                  "ADMIN"}
+                {getStoredUser()?.role || "STAFF"}
               </span>
 
             </div>
