@@ -2678,6 +2678,11 @@
   display: none;
 }
 
+/* Mobile profile card inside sidebar — hidden on desktop */
+.sidebar-mobile-profile {
+  display: none;
+}
+
 
 /* ========================================
    DASHBOARD RESPONSIVE
@@ -2806,11 +2811,12 @@
 /* Phone: hamburger + slide-in drawer */
 @media (max-width: 480px) {
 
-  /* Hamburger button — hidden on desktop */
+  /* Hamburger button */
   .hamburger-btn {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
     width: 38px;
     height: 38px;
@@ -2822,12 +2828,71 @@
     flex-shrink: 0;
   }
 
-  .hamburger-btn span {
+  .hamburger-btn span:not(.hamburger-close) {
     display: block;
     height: 2px;
     width: 100%;
     background: #111;
     border-radius: 2px;
+  }
+
+  /* X icon when open */
+  .hamburger-btn .hamburger-close {
+    font-size: 16px;
+    color: #111;
+    line-height: 1;
+  }
+
+  /* Hide header profile on mobile */
+  .header-user-desktop {
+    display: none !important;
+  }
+
+  /* Show profile inside sidebar on mobile */
+  .sidebar-mobile-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 12px;
+    margin-top: 16px;
+    border-top: 1px solid #252525;
+    border-bottom: 1px solid #252525;
+  }
+
+  .sidebar-mobile-profile strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .sidebar-mobile-profile span {
+    display: block;
+    font-size: 9px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* Close button inside sidebar profile */
+  .sidebar-mobile-close {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-mobile-close:hover {
+    color: white;
+    background: #222;
   }
 
   /* Sidebar hidden off-screen by default */

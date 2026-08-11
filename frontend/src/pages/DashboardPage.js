@@ -158,6 +158,28 @@ const DashboardPage = () => {
 
         </div>
 
+        {/* Mobile-only profile card inside sidebar */}
+        <div className="sidebar-mobile-profile">
+
+          <div className="sidebar-avatar">
+            {getUserName().charAt(0).toUpperCase()}
+          </div>
+
+          <div>
+            <strong>{getUserName()}</strong>
+            <span>{getRole()}</span>
+          </div>
+
+          <button
+            className="sidebar-mobile-close"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+
+        </div>
+
 
         {/* Navigation */}
 
@@ -319,11 +341,17 @@ const DashboardPage = () => {
           <button
             className="hamburger-btn"
             onClick={() => setSidebarOpen((prev) => !prev)}
-            aria-label="Toggle navigation"
+            aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
           >
-            <span />
-            <span />
-            <span />
+            {sidebarOpen ? (
+              <span className="hamburger-close">✕</span>
+            ) : (
+              <>
+                <span />
+                <span />
+                <span />
+              </>
+            )}
           </button>
 
           <div>
@@ -354,7 +382,7 @@ const DashboardPage = () => {
             </button>
 
 
-            <div className="header-user">
+            <div className="header-user header-user-desktop">
 
               <div className="header-avatar">
                 {getUserName()
