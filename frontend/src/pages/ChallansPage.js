@@ -750,7 +750,7 @@ const ChallansPage = () => {
         status:
           challanForm.status,
 
-        items
+        products: items
       };
 
       const response = await fetch(
