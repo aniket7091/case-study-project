@@ -1,0 +1,851 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
+
+const DashboardPage = () => {
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const API_URL = import.meta.env.VITE_API_URL || "https://case-study-backend-3cb3.onrender.com/api";
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("tradeflow_user");
+
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error("Invalid user data");
+      }
+    }
+
+    fetchDashboard();
+  }, []);
+
+  const fetchDashboard = async () => {
+    try {
+      setLoading(true);
+
+      const token =
+        localStorage.getItem("tradeflow_token");
+
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+
+      const storedUser =
+        localStorage.getItem("tradeflow_user");
+
+      let currentUser = null;
+
+      if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+      }
+
+      /*
+       * Admin dashboard API
+       *
+       * GET /api/admin/dashboard
+       */
+
+      if (
+        currentUser?.role === "ADMIN" ||
+        currentUser?.role === "admin"
+      ) {
+        const response = await fetch(
+          `${API_URL}/admin/dashboard`,
+          {
+            method: "GET",
+
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            }
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message ||
+              "Unable to load dashboard"
+          );
+        }
+
+        setStats(
+          data.data ||
+          data.dashboard ||
+          data
+        );
+      }
+
+    } catch (err) {
+      console.error(err);
+
+      setError(
+        err.message ||
+          "Unable to load dashboard data."
+      );
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("tradeflow_token");
+    localStorage.removeItem("tradeflow_user");
+
+    navigate("/login", {
+      replace: true
+    });
+  };
+
+  const getUserName = () => {
+    if (!user) {
+      return "User";
+    }
+
+    return (
+      user.name ||
+      user.full_name ||
+      user.email?.split("@")[0] ||
+      "User"
+    );
+  };
+
+  const getRole = () => {
+    if (!user?.role) {
+      return "USER";
+    }
+
+    return user.role.toUpperCase();
+  };
+
+  return (
+    <div className="dashboard-page">
+
+      {/* 
+          SIDEBAR
+       */}
+
+      <aside className="dashboard-sidebar-main">
+
+        <div className="dashboard-brand">
+
+          <div className="dashboard-logo">
+            T
+          </div>
+
+          <span>
+            TradeFlow
+          </span>
+
+        </div>
+
+
+        {/* Navigation */}
+
+        <nav className="dashboard-nav">
+
+          <p className="nav-section-title">
+            MAIN
+          </p>
+
+          <button
+            className="dashboard-nav-item active"
+          >
+            <span className="nav-item-icon">
+              ◉
+            </span>
+
+            Dashboard
+          </button>
+
+
+          <button
+            className="dashboard-nav-item"
+            onClick={() =>
+              navigate("/customers")
+            }
+          >
+            <span className="nav-item-icon">
+              ◎
+            </span>
+
+            Customers
+          </button>
+
+
+          <button
+            className="dashboard-nav-item"
+            onClick={() =>
+              navigate("/products")
+            }
+          >
+            <span className="nav-item-icon">
+              ◇
+            </span>
+
+            Products
+          </button>
+
+
+          <button
+            className="dashboard-nav-item"
+            onClick={() =>
+              navigate("/inventory")
+            }
+          >
+            <span className="nav-item-icon">
+              ▣
+            </span>
+
+            Inventory
+          </button>
+
+
+          <button
+            className="dashboard-nav-item"
+            onClick={() =>
+              navigate("/challans")
+            }
+          >
+            <span className="nav-item-icon">
+              ≡
+            </span>
+
+            Challans
+          </button>
+
+
+          {getRole() === "ADMIN" && (
+            <>
+              <p className="nav-section-title second">
+                ADMIN
+              </p>
+
+              <button
+                className="dashboard-nav-item"
+                onClick={() =>
+                  navigate("/users")
+                }
+              >
+                <span className="nav-item-icon">
+                  ◉
+                </span>
+
+                Users
+              </button>
+
+              <button
+                className="dashboard-nav-item"
+                onClick={() =>
+                  navigate("/reports")
+                }
+              >
+                <span className="nav-item-icon">
+                  ↗
+                </span>
+
+                Reports
+              </button>
+            </>
+          )}
+
+        </nav>
+
+
+        {/* Bottom */}
+
+        <div className="dashboard-sidebar-bottom">
+
+          <div className="sidebar-user-mini">
+
+            <div className="sidebar-avatar">
+              {getUserName()
+                .charAt(0)
+                .toUpperCase()}
+            </div>
+
+            <div>
+              <strong>
+                {getUserName()}
+              </strong>
+
+              <span>
+                {getRole()}
+              </span>
+            </div>
+
+          </div>
+
+
+          <button
+            className="logout-button"
+            onClick={handleLogout}
+          >
+            <span>
+              ↪
+            </span>
+
+            Logout
+          </button>
+
+        </div>
+
+      </aside>
+
+
+      {/* 
+          MAIN CONTENT
+       */}
+
+      <main className="dashboard-content">
+
+        {/* Header */}
+
+        <header className="dashboard-header">
+
+          <div>
+
+            <p className="dashboard-breadcrumb">
+              Overview
+            </p>
+
+            <h1>
+              Good morning, {getUserName()}
+            </h1>
+
+            <p className="dashboard-subtitle">
+              Here's what's happening with your
+              business today.
+            </p>
+
+          </div>
+
+
+          <div className="dashboard-header-right">
+
+            <button
+              className="notification-button"
+              title="Notifications"
+            >
+              ♢
+            </button>
+
+
+            <div className="header-user">
+
+              <div className="header-avatar">
+                {getUserName()
+                  .charAt(0)
+                  .toUpperCase()}
+              </div>
+
+              <div>
+                <strong>
+                  {getUserName()}
+                </strong>
+
+                <span>
+                  {getRole()}
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </header>
+
+
+        {/* Error */}
+
+        {error && (
+          <div className="dashboard-error">
+            <span>!</span>
+            {error}
+          </div>
+        )}
+
+
+        {/* 
+            ADMIN STATS
+         */}
+
+        {getRole() === "ADMIN" && (
+
+          <section className="dashboard-stats">
+
+            <div className="dashboard-stat-card">
+
+              <div className="stat-card-top">
+                <span>
+                  Total Customers
+                </span>
+
+                <div className="stat-icon">
+                  ◎
+                </div>
+              </div>
+
+              <h2>
+                {loading
+                  ? "..."
+                  : stats?.customers?.total ?? 0}
+              </h2>
+
+              <p>
+                <span className="stat-positive">
+                  {stats?.customers?.active ?? 0}
+                </span>
+
+                {" "}active customers
+              </p>
+
+            </div>
+
+
+            <div className="dashboard-stat-card">
+
+              <div className="stat-card-top">
+                <span>
+                  Total Products
+                </span>
+
+                <div className="stat-icon">
+                  ◇
+                </div>
+              </div>
+
+              <h2>
+                {loading
+                  ? "..."
+                  : stats?.products?.total ?? 0}
+              </h2>
+
+              <p>
+                <span className="stat-warning">
+                  {stats?.products?.low_stock ?? 0}
+                </span>
+
+                {" "}low stock
+              </p>
+
+            </div>
+
+
+            <div className="dashboard-stat-card">
+
+              <div className="stat-card-top">
+                <span>
+                  Total Challans
+                </span>
+
+                <div className="stat-icon">
+                  ≡
+                </div>
+              </div>
+
+              <h2>
+                {loading
+                  ? "..."
+                  : stats?.challans?.total ?? 0}
+              </h2>
+
+              <p>
+                <span className="stat-positive">
+                  {stats?.challans?.confirmed ?? 0}
+                </span>
+
+                {" "}confirmed
+              </p>
+
+            </div>
+
+
+            <div className="dashboard-stat-card">
+
+              <div className="stat-card-top">
+                <span>
+                  Active Users
+                </span>
+
+                <div className="stat-icon">
+                  ◉
+                </div>
+              </div>
+
+              <h2>
+                {loading
+                  ? "..."
+                  : stats?.users?.active ?? 0}
+              </h2>
+
+              <p>
+                out of{" "}
+                {stats?.users?.total ?? 0}
+                {" "}users
+              </p>
+
+            </div>
+
+          </section>
+        )}
+
+
+        {/* 
+            ROLE WELCOME
+         */}
+
+        {getRole() !== "ADMIN" && (
+
+          <section className="role-overview">
+
+            <div className="role-overview-content">
+
+              <span className="role-overview-label">
+                {getRole()} WORKSPACE
+              </span>
+
+              <h2>
+                Welcome to your
+                <br />
+                <span>
+                  TradeFlow workspace.
+                </span>
+              </h2>
+
+              <p>
+                Use the navigation to manage the
+                operations available to your role.
+              </p>
+
+            </div>
+
+            <div className="role-overview-icon">
+              {getRole().charAt(0)}
+            </div>
+
+          </section>
+        )}
+
+
+        {/* 
+            QUICK ACTIONS
+         */}
+
+        <section className="dashboard-section">
+
+          <div className="section-title-row">
+
+            <div>
+              <p>
+                QUICK ACTIONS
+              </p>
+
+              <h2>
+                What would you like to do?
+              </h2>
+            </div>
+
+          </div>
+
+
+          <div className="quick-actions">
+
+            {/* Customer */}
+
+            {(getRole() === "ADMIN" ||
+              getRole() === "SALES") && (
+
+              <button
+                className="quick-action-card"
+                onClick={() =>
+                  navigate("/customers")
+                }
+              >
+
+                <div className="quick-action-icon">
+                  ◎
+                </div>
+
+                <div>
+                  <h3>
+                    Manage Customers
+                  </h3>
+
+                  <p>
+                    Add and manage customer
+                    relationships.
+                  </p>
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+            )}
+
+
+            {/* Products */}
+
+            {(getRole() === "ADMIN" ||
+              getRole() === "WAREHOUSE") && (
+
+              <button
+                className="quick-action-card"
+                onClick={() =>
+                  navigate("/products")
+                }
+              >
+
+                <div className="quick-action-icon">
+                  ◇
+                </div>
+
+                <div>
+                  <h3>
+                    Manage Products
+                  </h3>
+
+                  <p>
+                    Manage products and pricing.
+                  </p>
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+            )}
+
+
+            {/* Inventory */}
+
+            {(getRole() === "ADMIN" ||
+              getRole() === "WAREHOUSE") && (
+
+              <button
+                className="quick-action-card"
+                onClick={() =>
+                  navigate("/inventory")
+                }
+              >
+
+                <div className="quick-action-icon">
+                  ▣
+                </div>
+
+                <div>
+                  <h3>
+                    Inventory
+                  </h3>
+
+                  <p>
+                    Track stock and movements.
+                  </p>
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+            )}
+
+
+            {/* Challans */}
+
+            {(getRole() === "ADMIN" ||
+              getRole() === "SALES") && (
+
+              <button
+                className="quick-action-card"
+                onClick={() =>
+                  navigate("/challans")
+                }
+              >
+
+                <div className="quick-action-icon">
+                  ≡
+                </div>
+
+                <div>
+                  <h3>
+                    Sales Challans
+                  </h3>
+
+                  <p>
+                    Create and manage challans.
+                  </p>
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+            )}
+
+          </div>
+
+        </section>
+
+
+        {/* 
+            ADMIN BUSINESS OVERVIEW
+         */}
+
+        {getRole() === "ADMIN" && (
+
+          <section className="dashboard-lower-grid">
+
+            {/* Challans */}
+
+            <div className="dashboard-panel">
+
+              <div className="panel-header">
+
+                <div>
+                  <p>
+                    SALES
+                  </p>
+
+                  <h2>
+                    Challan Overview
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() =>
+                    navigate("/challans")
+                  }
+                >
+                  View all →
+                </button>
+
+              </div>
+
+
+              <div className="challan-stats">
+
+                <div>
+                  <strong>
+                    {stats?.challans?.draft ?? 0}
+                  </strong>
+
+                  <span>
+                    Draft
+                  </span>
+                </div>
+
+                <div>
+                  <strong>
+                    {stats?.challans?.confirmed ?? 0}
+                  </strong>
+
+                  <span>
+                    Confirmed
+                  </span>
+                </div>
+
+                <div>
+                  <strong>
+                    {stats?.challans?.cancelled ?? 0}
+                  </strong>
+
+                  <span>
+                    Cancelled
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            {/* Customers */}
+
+            <div className="dashboard-panel">
+
+              <div className="panel-header">
+
+                <div>
+                  <p>
+                    CRM
+                  </p>
+
+                  <h2>
+                    Customer Overview
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() =>
+                    navigate("/customers")
+                  }
+                >
+                  View all →
+                </button>
+
+              </div>
+
+
+              <div className="customer-summary">
+
+                <div className="customer-summary-number">
+                  {stats?.customers?.total ?? 0}
+                </div>
+
+                <div>
+
+                  <span>
+                    Total customers
+                  </span>
+
+                  <p>
+                    {stats?.customers?.leads ?? 0}
+                    {" "}leads currently in CRM
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+        )}
+
+
+        {/* Footer */}
+
+        <footer className="dashboard-footer">
+
+          <span>
+            © 2026 TradeFlow
+          </span>
+
+          <span>
+            ERP & CRM Operations Portal
+          </span>
+
+        </footer>
+
+      </main>
+
+    </div>
+  );
+};
+
+export default DashboardPage;

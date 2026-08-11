@@ -2,6 +2,8 @@ import React from "react";
 import LandingPage from "./pages/LandingPage";
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 import {
   BrowserRouter,
   Routes,
@@ -25,7 +27,16 @@ function App() {
         <Route path="/contact" element={<LandingPage />} />
 
         {/* for the login page */}
-        <Route path="/login" element={<LoginPage />}/>
+        <Route path="/login" element={<LoginPage />} />
+        
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardPage />}/>
+
+        </Route>
+
+
+
 
       </Routes>
 

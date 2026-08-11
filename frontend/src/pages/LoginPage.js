@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthInput from "../components/AuthInput";
 import "../App.css";
 
 const LoginPage = () => {
@@ -300,98 +301,37 @@ const LoginPage = () => {
 
             {/* Email */}
 
-            <div className="form-group">
-
-              <label htmlFor="email">
-                Email address
-              </label>
-
-              <div className="input-wrapper">
-
-                <span className="input-icon">
-                  @
-                </span>
-
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="you@example.com"
-                  autoComplete="email"
-                />
-
-              </div>
-
-            </div>
+            <AuthInput
+              id="email"
+              label="Email address"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              autoComplete="email"
+              icon="@"
+            />
 
 
             {/* Password */}
 
-            <div className="form-group">
-
-              <div className="password-label">
-
-                <label htmlFor="password">
-                  Password
-                </label>
-
-                <button
-                  type="button"
-                  className="forgot-password"
-                  onClick={() => {
-                    alert(
-                      "Password reset functionality will be added later."
-                    );
-                  }}
-                >
-                  Forgot password?
-                </button>
-
-              </div>
-
-
-              <div className="input-wrapper">
-
-                <span className="input-icon">
-                  •
-                </span>
-
-                <input
-                  id="password"
-                  type={
-                    showPassword
-                      ? "text"
-                      : "password"
-                  }
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
-                />
-
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() =>
-                    setShowPassword(
-                      (prev) => !prev
-                    )
-                  }
-                  aria-label={
-                    showPassword
-                      ? "Hide password"
-                      : "Show password"
-                  }
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-
-              </div>
-
-            </div>
+            <AuthInput
+              id="password"
+              label="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              autoComplete="current-password"
+              icon="•"
+              isPassword
+              showPassword={showPassword}
+              onTogglePassword={() => setShowPassword((prev) => !prev)}
+              onForgotPassword={() =>
+                alert("Password reset functionality will be added later.")
+              }
+            />
 
 
             {/* Remember */}
@@ -450,10 +390,6 @@ const LoginPage = () => {
 
 
           <div className="login-security">
-
-            <span>
-              🔒
-            </span>
 
             Secure authentication
 
