@@ -1046,6 +1046,288 @@ const ChallansPage = () => {
   };
 
   // 
+  // GENERATE INVOICE
+  // 
+
+  const generateInvoice = (challan) => {
+
+    if (!challan) return;
+
+    const items = challan.items || challan.challan_items || [];
+
+    const customerName =
+      challan.customer_name ||
+      challan.customer?.name ||
+      "Customer";
+
+    const challanNumber =
+      challan.challan_number || challan.id || "—";
+
+    const createdDate = challan.created_at
+      ? new Date(challan.created_at).toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        })
+      : "—";
+
+    const totalQty =
+      challan.total_quantity ??
+      items.reduce((s, i) => s + Number(i.quantity || 0), 0);
+
+    const totalAmt = items.reduce(
+      (s, i) => s + Number(i.unit_price || 0) * Number(i.quantity || 0),
+      0
+    );
+
+    const fmt = (v) =>
+      Number(v || 0).toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 2,
+      });
+
+    const rowsHtml = items.length
+      ? items
+          .map(
+            (item, idx) => `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>
+              <strong>${item.product_name || item.name || "—"}</strong>
+              ${item.sku ? `<br/><small style="color:#888">${item.sku}</small>` : ""}
+            </td>
+            <td style="text-align:right">${fmt(item.unit_price)}</td>
+            <td style="text-align:center">${item.quantity ?? 0}</td>
+            <td style="text-align:right"><strong>${fmt(
+              Number(item.unit_price || 0) * Number(item.quantity || 0)
+            )}</strong></td>
+          </tr>`
+          )
+          .join("")
+      : `<tr><td colspan="5" style="text-align:center;color:#aaa;padding:20px">No items</td></tr>`;
+
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice — ${challanNumber}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: white;
+      padding: 40px;
+    }
+    .inv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #111;
+    }
+    .inv-brand {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #111;
+    }
+    .inv-brand span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #888;
+      letter-spacing: 0;
+      margin-top: 4px;
+    }
+    .inv-meta { text-align: right; }
+    .inv-meta .inv-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+    }
+    .inv-meta p { color: #666; font-size: 12px; margin-top: 4px; }
+    .inv-status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .inv-parties {
+      display: flex;
+      gap: 60px;
+      margin-bottom: 36px;
+    }
+    .inv-party-box h4 {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+    .inv-party-box p {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+    }
+    .inv-party-box span {
+      font-size: 12px;
+      color: #666;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    thead tr {
+      background: #f5f5f2;
+    }
+    thead th {
+      padding: 11px 14px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #666;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e0;
+    }
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #333;
+      vertical-align: middle;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    .inv-totals {
+      margin-left: auto;
+      width: 280px;
+      border: 1px solid #e5e5e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .inv-totals-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #555;
+    }
+    .inv-totals-row:last-child {
+      border-bottom: none;
+      background: #111;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .inv-footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e5e0;
+      display: flex;
+      justify-content: space-between;
+      color: #aaa;
+      font-size: 11px;
+    }
+    @media print {
+      body { padding: 20px; }
+      @page { margin: 0.5cm; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="inv-header">
+    <div class="inv-brand">
+      TradeFlow
+      <span>ERP &amp; CRM Operations Portal</span>
+    </div>
+    <div class="inv-meta">
+      <p>INVOICE</p>
+      <div class="inv-number">${challanNumber}</div>
+      <p>Issued: ${createdDate}</p>
+      <div class="inv-status">✔ CONFIRMED</div>
+    </div>
+  </div>
+
+  <div class="inv-parties">
+    <div class="inv-party-box">
+      <h4>Bill To</h4>
+      <p>${customerName}</p>
+      <span>Customer</span>
+    </div>
+    <div class="inv-party-box">
+      <h4>Challan Reference</h4>
+      <p>${challanNumber}</p>
+      <span>Confirmed sales challan</span>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th style="text-align:right">Unit Price</th>
+        <th style="text-align:center">Qty</th>
+        <th style="text-align:right">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${rowsHtml}
+    </tbody>
+  </table>
+
+  <div class="inv-totals">
+    <div class="inv-totals-row">
+      <span>Total Items</span>
+      <span>${items.length}</span>
+    </div>
+    <div class="inv-totals-row">
+      <span>Total Quantity</span>
+      <span>${totalQty}</span>
+    </div>
+    <div class="inv-totals-row">
+      <span>Total Amount</span>
+      <span>${fmt(totalAmt)}</span>
+    </div>
+  </div>
+
+  <div class="inv-footer">
+    <span>Generated by TradeFlow — ${new Date().toLocaleDateString("en-IN")}</span>
+    <span>This is a computer-generated invoice and does not require a signature.</span>
+  </div>
+
+  <script>
+    window.onload = function() { window.print(); };
+  </script>
+
+</body>
+</html>`;
+
+    const win = window.open("", "_blank", "width=900,height=700");
+    if (!win) {
+      alert("Pop-up blocked! Please allow pop-ups for this site to download the invoice.");
+      return;
+    }
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+  };
+
+  // 
   // FORMAT DATE
   // 
 
@@ -1739,6 +2021,24 @@ const ChallansPage = () => {
                                 }
                               >
                                 Cancel
+                              </button>
+
+                            )}
+
+
+                            {challan.status ===
+                              "CONFIRMED" && (
+
+                              <button
+                                className="invoice-download-btn"
+                                onClick={() =>
+                                  generateInvoice(
+                                    challan
+                                  )
+                                }
+                                title="Download Invoice PDF"
+                              >
+                                ↓ Invoice
                               </button>
 
                             )}
@@ -2652,6 +2952,27 @@ const ChallansPage = () => {
                       {submitting
                         ? "Confirming..."
                         : "Confirm challan"}
+                    </button>
+
+                  </div>
+
+                )}
+
+
+                {selectedChallan.status ===
+                  "CONFIRMED" && (
+
+                  <div className="challan-detail-actions">
+
+                    <button
+                      className="challan-invoice-action"
+                      onClick={() =>
+                        generateInvoice(
+                          selectedChallan
+                        )
+                      }
+                    >
+                      ↓ Generate &amp; Download Invoice PDF
                     </button>
 
                   </div>

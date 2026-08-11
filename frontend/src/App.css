@@ -4969,6 +4969,47 @@
   opacity: 0.45;
 }
 
+.challan-invoice-action {
+  width: 100%;
+  height: 46px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #1a6b3c 0%, #2e7d32 100%);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  transition: opacity 0.15s;
+}
+
+.challan-invoice-action:hover {
+  opacity: 0.88;
+}
+
+.invoice-download-btn {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  background: #f1f8f1;
+  color: #2e7d32;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.invoice-download-btn:hover {
+  background: #e8f5e9;
+}
+
 /* 
    USER MANAGEMENT
  */
