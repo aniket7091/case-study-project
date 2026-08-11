@@ -133,7 +133,7 @@ In the live deployment of this project, the backend is hosted on Render and the 
 ## 8. Live Application Links
 
 - **Frontend URL:** https://tradeflow-f.netlify.app/
-- **Backend API URL:** https://case-study-backend-3cb3.onrender.com/api
+- **Backend API URL:** https://case-study-backend-3cb3.onrender.com
 
 ---
 
