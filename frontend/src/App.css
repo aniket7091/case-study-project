@@ -1937,11 +1937,19 @@
 }
 
 .nav-item-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.nav-item-icon svg {
   width: 18px;
-
-  text-align: center;
-
-  font-size: 12px;
+  height: 18px;
+  display: block;
 }
 
 
@@ -7253,8 +7261,14 @@
   }
 
   .nav-item-icon {
-    font-size: 15px;
-    width: auto;
+    width: 22px;
+    height: 22px;
+    font-size: 20px;
+  }
+
+  .nav-item-icon svg {
+    width: 20px;
+    height: 20px;
   }
 
   .dashboard-sidebar-bottom {

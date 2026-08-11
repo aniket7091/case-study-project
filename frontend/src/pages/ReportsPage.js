@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import {
+  MdDashboard, MdPeople, MdInventory2, MdWarehouse,
+  MdReceipt, MdSupervisedUserCircle, MdBarChart
+} from "react-icons/md";
 
 const ReportsPage = () => {
   const navigate = useNavigate();
@@ -402,7 +406,7 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdDashboard />
             </span>
             Dashboard
           </button>
@@ -414,7 +418,7 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◎
+              <MdPeople />
             </span>
             Customers
           </button>
@@ -426,7 +430,7 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◇
+              <MdInventory2 />
             </span>
             Products
           </button>
@@ -438,7 +442,7 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ▣
+              <MdWarehouse />
             </span>
             Inventory
           </button>
@@ -450,7 +454,7 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ≡
+              <MdReceipt />
             </span>
             Challans
           </button>
@@ -466,14 +470,14 @@ const ReportsPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdSupervisedUserCircle />
             </span>
             Users
           </button>
 
           <button className="dashboard-nav-item active">
             <span className="nav-item-icon">
-              ↗
+              <MdBarChart />
             </span>
             Reports
           </button>

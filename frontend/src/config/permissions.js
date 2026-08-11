@@ -1,3 +1,14 @@
+import React from "react";
+import {
+  MdDashboard,
+  MdPeople,
+  MdInventory2,
+  MdWarehouse,
+  MdReceipt,
+  MdSupervisedUserCircle,
+  MdBarChart,
+} from "react-icons/md";
+
 export const ROLES = {
   ADMIN: "ADMIN",
   SALES: "SALES",
@@ -46,13 +57,13 @@ export const ROLE_PERMISSIONS = {
 };
 
 export const NAVIGATION_ITEMS = [
-  { module: MODULES.DASHBOARD, label: "Dashboard", path: "/dashboard", icon: "◉", section: "main" },
-  { module: MODULES.CUSTOMERS, label: "Customers", path: "/customers", icon: "◎", section: "main" },
-  { module: MODULES.PRODUCTS, label: "Products", path: "/products", icon: "◇", section: "main" },
-  { module: MODULES.INVENTORY, label: "Inventory", path: "/inventory", icon: "▣", section: "main" },
-  { module: MODULES.CHALLANS, label: "Challans", path: "/challans", icon: "≡", section: "main" },
-  { module: MODULES.USERS, label: "Users", path: "/users", icon: "◉", section: "admin" },
-  { module: MODULES.REPORTS, label: "Reports", path: "/reports", icon: "↗", section: "admin" }
+  { module: MODULES.DASHBOARD, label: "Dashboard",  path: "/dashboard", icon: <MdDashboard />,          section: "main"  },
+  { module: MODULES.CUSTOMERS, label: "Customers",  path: "/customers", icon: <MdPeople />,              section: "main"  },
+  { module: MODULES.PRODUCTS,  label: "Products",   path: "/products",  icon: <MdInventory2 />,          section: "main"  },
+  { module: MODULES.INVENTORY, label: "Inventory",  path: "/inventory", icon: <MdWarehouse />,           section: "main"  },
+  { module: MODULES.CHALLANS,  label: "Challans",   path: "/challans",  icon: <MdReceipt />,             section: "main"  },
+  { module: MODULES.USERS,     label: "Users",      path: "/users",     icon: <MdSupervisedUserCircle />,section: "admin" },
+  { module: MODULES.REPORTS,   label: "Reports",    path: "/reports",   icon: <MdBarChart />,            section: "admin" },
 ];
 
 const getJwtPayload = (token) => {

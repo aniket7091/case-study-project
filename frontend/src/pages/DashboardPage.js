@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
+import {
+  MdDashboard, MdPeople, MdInventory2, MdWarehouse,
+  MdReceipt, MdSupervisedUserCircle, MdBarChart
+} from "react-icons/md";
 import "../App.css";
 
 const DashboardPage = () => {
@@ -227,7 +231,7 @@ const DashboardPage = () => {
             onClick={() => setSidebarOpen(false)}
           >
             <span className="nav-item-icon">
-              ◉
+              <MdDashboard />
             </span>
 
             Dashboard
@@ -239,7 +243,7 @@ const DashboardPage = () => {
             onClick={() => { navigate("/customers"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
-              ◎
+              <MdPeople />
             </span>
 
             Customers
@@ -251,7 +255,7 @@ const DashboardPage = () => {
             onClick={() => { navigate("/products"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
-              ◇
+              <MdInventory2 />
             </span>
 
             Products
@@ -263,7 +267,7 @@ const DashboardPage = () => {
             onClick={() => { navigate("/inventory"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
-              ▣
+              <MdWarehouse />
             </span>
 
             Inventory
@@ -275,7 +279,7 @@ const DashboardPage = () => {
             onClick={() => { navigate("/challans"); setSidebarOpen(false); }}
           >
             <span className="nav-item-icon">
-              ≡
+              <MdReceipt />
             </span>
 
             Challans
@@ -295,7 +299,7 @@ const DashboardPage = () => {
                 }
               >
                 <span className="nav-item-icon">
-                  ◉
+                  <MdSupervisedUserCircle />
                 </span>
 
                 Users
@@ -308,7 +312,7 @@ const DashboardPage = () => {
                 }
               >
                 <span className="nav-item-icon">
-                  ↗
+                  <MdBarChart />
                 </span>
 
                 Reports

@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
 
 import "../App.css";
+import {
+  MdDashboard, MdPeople, MdInventory2, MdWarehouse,
+  MdReceipt, MdSupervisedUserCircle, MdBarChart
+} from "react-icons/md";
 
 const SidebarNavigationComponent = SidebarNavigation;
 
@@ -730,7 +734,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdDashboard />
             </span>
 
             Dashboard
@@ -744,7 +748,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◎
+              <MdPeople />
             </span>
 
             Customers
@@ -758,7 +762,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◇
+              <MdInventory2 />
             </span>
 
             Products
@@ -767,7 +771,7 @@ const InventoryPage = () => {
 
           <button className="dashboard-nav-item active">
             <span className="nav-item-icon">
-              ▣
+              <MdWarehouse />
             </span>
 
             Inventory
@@ -781,7 +785,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ≡
+              <MdReceipt />
             </span>
 
             Challans
@@ -800,7 +804,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdSupervisedUserCircle />
             </span>
 
             Users
@@ -814,7 +818,7 @@ const InventoryPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ↗
+              <MdBarChart />
             </span>
 
             Reports

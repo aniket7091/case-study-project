@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
 
 import "../App.css";
+import {
+  MdDashboard, MdPeople, MdInventory2, MdWarehouse,
+  MdReceipt, MdSupervisedUserCircle, MdBarChart
+} from "react-icons/md";
 
 const DEFAULT_API_URL =
   "https://case-study-backend-3cb3.onrender.com/api";
@@ -1525,7 +1529,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdDashboard />
             </span>
 
             Dashboard
@@ -1539,7 +1543,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◎
+              <MdPeople />
             </span>
 
             Customers
@@ -1553,7 +1557,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◇
+              <MdInventory2 />
             </span>
 
             Products
@@ -1567,7 +1571,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ▣
+              <MdWarehouse />
             </span>
 
             Inventory
@@ -1578,7 +1582,7 @@ const ChallansPage = () => {
             className="dashboard-nav-item active"
           >
             <span className="nav-item-icon">
-              ≡
+              <MdReceipt />
             </span>
 
             Challans
@@ -1597,7 +1601,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ◉
+              <MdSupervisedUserCircle />
             </span>
 
             Users
@@ -1611,7 +1615,7 @@ const ChallansPage = () => {
             }
           >
             <span className="nav-item-icon">
-              ↗
+              <MdBarChart />
             </span>
 
             Reports
