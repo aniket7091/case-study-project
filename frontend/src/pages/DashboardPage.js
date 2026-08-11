@@ -888,6 +888,4 @@ const DashboardPage = () => {
     </div>
   );
 };
-
-export default DashboardPage;
 export default DashboardPage;
