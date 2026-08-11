@@ -15,6 +15,7 @@ TradeFlow is a comprehensive web-based Enterprise Resource Planning (ERP) and Cu
 | **Warehouse** | `warehouse@test.com` | `password123` |
 | **Accounts** | `accounts@test.com` | `password123` |
 
+
 *(Note: Replace with actual credentials if different during manual seeding)*
 
 ---
