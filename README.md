@@ -5,7 +5,7 @@ TradeFlow is a comprehensive web-based Enterprise Resource Planning (ERP) and Cu
 ## Live Demo
 
 - **Frontend URL:** https://tradeflow-f.netlify.app/
-- **Backend API URL:** `https://case-study-backend-3cb3.onrender.com/api`
+- **Backend API URL:** https://case-study-backend-3cb3.onrender.com/api
 
 ### Test Login Credentials
 | Role | Email | Password |
