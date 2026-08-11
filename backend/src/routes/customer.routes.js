@@ -12,9 +12,9 @@ const { authorizeRoles } =
     require("../middleware/role.middleware");
 
 
-// All customer APIs require authentication and ADMIN role
+// All customer APIs require authentication and ADMIN or SALES role
 router.use(protect);
-router.use(authorizeRoles("ADMIN"));
+router.use(authorizeRoles("ADMIN", "SALES"));
 
 
 // Create customer

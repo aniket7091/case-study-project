@@ -11,10 +11,10 @@ const { authorizeRoles } = require("../middleware/role.middleware");
 
 
 // Authentication required for all challan APIs
-
+// ADMIN and SALES can access all challan routes
 
 router.use(protect);
-router.use(authorizeRoles("ADMIN"));
+router.use(authorizeRoles("ADMIN", "SALES"));
 
 
 
