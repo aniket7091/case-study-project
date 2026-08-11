@@ -283,6 +283,32 @@ const DashboardPage = () => {
             </>
           )}
 
+          <p className="nav-section-title second">
+            ACCOUNT
+          </p>
+
+          <button
+            className="dashboard-nav-item"
+            onClick={handleLogout}
+          >
+            <span className="nav-item-icon">
+              ↪
+            </span>
+
+            Logout
+          </button>
+
+          <button
+            className="dashboard-nav-item"
+            onClick={() => navigate("/")}
+          >
+            <span className="nav-item-icon">
+              ←
+            </span>
+
+            Back to Home
+          </button>
+
         </nav>
 
 
@@ -309,18 +335,6 @@ const DashboardPage = () => {
             </div>
 
           </div>
-
-
-          <button
-            className="logout-button"
-            onClick={handleLogout}
-          >
-            <span>
-              ↪
-            </span>
-
-            Logout
-          </button>
 
         </div>
 
