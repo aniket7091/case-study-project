@@ -6484,24 +6484,25 @@
 
 .report-stat-card span {
   display: block;
-  color: #999;
-  font-size: 7px;
+  color: #888;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .7px;
+  margin-bottom: 6px;
 }
 
 .report-stat-card strong {
   display: block;
   margin-top: 7px;
   color: #222;
-  font-size: 20px;
+  font-size: 28px;
 }
 
 .report-stat-card small {
   display: block;
-  margin-top: 4px;
+  margin-top: 6px;
   color: #aaa;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .reports-two-column {
@@ -6529,7 +6530,7 @@
 
 .report-card-header p {
   color: #999;
-  font-size: 7px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .7px;
 }
@@ -6537,12 +6538,12 @@
 .report-card-header h2 {
   margin-top: 5px;
   color: #222;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .report-card-header > span {
   color: #999;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .report-breakdown {
@@ -6564,14 +6565,14 @@
 .report-breakdown span {
   display: block;
   color: #999;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .report-breakdown strong {
   display: block;
   margin-top: 5px;
   color: #333;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .report-category-list {
@@ -6594,14 +6595,14 @@
 .report-category-info strong {
   display: block;
   color: #333;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .report-category-info span {
   display: block;
   margin-top: 3px;
   color: #aaa;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .report-progress {
@@ -6620,7 +6621,7 @@
 
 .report-category-row > strong {
   color: #333;
-  font-size: 9px;
+  font-size: 13px;
   text-align: right;
 }
 
@@ -6644,25 +6645,25 @@
 .report-list-item strong {
   display: block;
   color: #333;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .report-list-item span {
   display: block;
   margin-top: 3px;
   color: #aaa;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .report-list-item > strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .report-link-button {
   border: none;
   background: transparent;
   color: #555;
-  font-size: 7px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -6672,7 +6673,7 @@
   margin: 0 !important;
   padding: 4px 7px;
   border-radius: 5px;
-  font-size: 7px !important;
+  font-size: 10px !important;
   font-weight: 600;
 }
 
