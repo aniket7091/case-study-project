@@ -13,8 +13,6 @@ import {
   MdAdminPanelSettings,
   MdStorefront,
   MdAccountBalance,
-  MdPersonPin,
-  MdTrendingUp,
 } from "react-icons/md";
 import "../App.css";
 
