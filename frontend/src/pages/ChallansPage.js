@@ -1046,6 +1046,35 @@ const ChallansPage = () => {
   };
 
   // 
+  // FETCH FULL CHALLAN THEN GENERATE INVOICE
+  // (used from table row where items are not loaded)
+  // 
+
+  const fetchFullChallanAndInvoice = async (challan) => {
+    try {
+      const token = getToken();
+      const response = await fetch(
+        `${API_URL}/challans/${challan.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await readApiResponse(response);
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to fetch challan details.");
+      }
+      const detail = data.data || data.challan || data;
+      generateInvoice(detail);
+    } catch (err) {
+      console.error("Invoice fetch error:", err);
+      alert("Could not load challan details. Please try again.");
+    }
+  };
+
+  // 
   // GENERATE INVOICE
   // 
 
@@ -1053,11 +1082,21 @@ const ChallansPage = () => {
 
     if (!challan) return;
 
-    const items = challan.items || challan.challan_items || [];
+    // Try every possible field name the backend might use for items
+    const items =
+      challan.items ||
+      challan.sales_challan_items ||
+      challan.challan_items ||
+      challan.line_items ||
+      challan.products ||
+      challan.data?.items ||
+      challan.data?.challan_items ||
+      [];
 
     const customerName =
       challan.customer_name ||
       challan.customer?.name ||
+      challan.customer?.business_name ||
       "Customer";
 
     const challanNumber =
@@ -1216,6 +1255,27 @@ const ChallansPage = () => {
       border: 1px solid #e5e5e0;
       border-radius: 10px;
       overflow: hidden;
+    }
+    .challan-invoice-action {
+      width: 100%;
+      height: 46px;
+      padding: 0 20px;
+      border: none;
+      border-radius: 9px;
+      background: #111;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.2px;
+      transition: background 0.15s;
+    }
+    .challan-invoice-action:hover {
+      background: #1d1d1d;
     }
     .inv-totals-row {
       display: flex;
@@ -2032,7 +2092,7 @@ const ChallansPage = () => {
                               <button
                                 className="invoice-download-btn"
                                 onClick={() =>
-                                  generateInvoice(
+                                  fetchFullChallanAndInvoice(
                                     challan
                                   )
                                 }
