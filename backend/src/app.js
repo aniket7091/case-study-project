@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { supabase } = require("./config/database");
 const customerRoutes = require("./routes/customer.routes");
 const productRoutes = require("./routes/product.routes");
@@ -7,6 +8,18 @@ const userRoutes = require("./routes/user.routes");
 const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
+
+// CORS — allow frontend origins
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://case-study-backend-3cb3.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 
 // Core Middleware
 app.use(express.json());
