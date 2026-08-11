@@ -70,23 +70,14 @@ const getProducts = async ({
         );
     }
 
-    // Low stock filter
-    if (low_stock === "true") {
-        query = query.filter(
-            "current_stock",
-            "lte",
-            "minimum_stock"
-        );
-    }
+    query = query.order("created_at", {
+        ascending: false
+    });
 
-    query = query
-        .order("created_at", {
-            ascending: false
-        })
-        .range(
-            offset,
-            offset + limit - 1
-        );
+    // If not doing low_stock filter, paginate at DB level
+    if (low_stock !== "true") {
+        query = query.range(offset, offset + limit - 1);
+    }
 
     const {
         data,
@@ -98,14 +89,26 @@ const getProducts = async ({
         throw new Error(error.message);
     }
 
+    let finalData = data || [];
+    let finalCount = count || 0;
+
+    // Manual filtering for low stock because Supabase JS client doesn't natively support comparing two columns directly without an RPC
+    if (low_stock === "true") {
+        finalData = finalData.filter(p => p.current_stock <= p.minimum_stock);
+        finalCount = finalData.length;
+        
+        // Paginate in memory
+        finalData = finalData.slice(offset, offset + limit);
+    }
+
     return {
-        products: data,
+        products: finalData,
         pagination: {
             page,
             limit,
-            total: count,
+            total: finalCount,
             totalPages: Math.ceil(
-                count / limit
+                finalCount / limit
             )
         }
     };

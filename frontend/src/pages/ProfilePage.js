@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
 import PageHeader from "../components/PageHeader";
 import DashboardErrorAlert from "../components/DashboardErrorAlert";
+import { getStoredUser } from "../config/permissions";
 
 import "../App.css";
 import {
@@ -662,30 +663,17 @@ const ProfilePage = () => {
           >
 
             <div className="sidebar-avatar">
-
-              {(
-                user?.name ||
-                "U"
-              )
-                .charAt(0)
-                .toUpperCase()}
-
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
 
               <strong>
-                {
-                  user?.name ||
-                  "User"
-                }
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                {
-                  user?.role ||
-                  "USER"
-                }
+                {getStoredUser()?.role || "STAFF"}
               </span>
 
             </div>

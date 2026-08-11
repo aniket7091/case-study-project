@@ -11,6 +11,7 @@ import DashboardErrorAlert from "../components/DashboardErrorAlert";
 import ReportCardHeader from "../components/reports/ReportCardHeader";
 import ReportEmptyState from "../components/reports/ReportEmptyState";
 import ReportStatCard from "../components/reports/ReportStatCard";
+import { getStoredUser } from "../config/permissions";
 
 const ReportsPage = () => {
   const navigate = useNavigate();
@@ -501,20 +502,16 @@ const ReportsPage = () => {
             }
           >
             <div className="sidebar-avatar">
-              {(
-                user?.name || "U"
-              )
-                .charAt(0)
-                .toUpperCase()}
+              {(getStoredUser()?.name || "A").charAt(0).toUpperCase()}
             </div>
 
             <div>
               <strong>
-                {user?.name || "User"}
+                {getStoredUser()?.name || "User"}
               </strong>
 
               <span>
-                {user?.role || "USER"}
+                {getStoredUser()?.role || "STAFF"}
               </span>
             </div>
           </button>
