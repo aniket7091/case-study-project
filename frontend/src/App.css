@@ -2111,6 +2111,8 @@
   align-items: flex-start;
 
   justify-content: space-between;
+
+  margin-bottom: 30px;
 }
 
 .dashboard-breadcrumb {
@@ -6454,13 +6456,14 @@
  */
 
 .report-refresh-button {
-  height: 34px;
-  padding: 0 12px;
+  height: 40px;
+  padding: 0 16px;
   border: 1px solid #deded9;
-  border-radius: 6px;
+  border-radius: 8px;
   background: white;
   color: #555;
-  font-size: 8px;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
 }
 
