@@ -2835,6 +2835,71 @@
   cursor: pointer;
 }
 
+.product-category-input,
+.low-stock-filter {
+  width: 100%;
+
+  min-width: 0;
+
+  height: 42px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #deded9;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #555;
+
+  font-family: inherit;
+
+  font-size: 12px;
+}
+
+.product-category-input {
+  padding: 0 12px;
+
+  outline: none;
+}
+
+.product-category-input:focus {
+  border-color: #999;
+
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.035);
+}
+
+.low-stock-filter {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 12px;
+
+  cursor: pointer;
+}
+
+.low-stock-filter:hover {
+  border-color: #aaa;
+
+  color: #222;
+}
+
+.low-stock-filter.active {
+  border-color: #b17925;
+
+  background: #fff7e8;
+
+  color: #9a651c;
+
+  font-weight: 650;
+}
+
 .reset-filter-button {
   height: 42px;
 
@@ -3655,8 +3720,97 @@
 
 
 /* 
-   FOLLOW-UP
+   STOCK MOVEMENT HISTORY
  */
+
+.stock-movement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+}
+
+.stock-movement-item {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stock-movement-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.movement-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.movement-icon.in {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.movement-icon.out {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.movement-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.movement-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.movement-top strong {
+  font-size: 14px;
+  color: #111;
+  font-weight: 600;
+}
+
+.movement-quantity {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movement-quantity.in {
+  color: #2e7d32;
+}
+
+.movement-quantity.out {
+  color: #c62828;
+}
+
+.movement-main p {
+  font-size: 13px;
+  color: #444;
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+
+.movement-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #888;
+}
+
+
 
 .followup-section {
   margin-top: 28px;

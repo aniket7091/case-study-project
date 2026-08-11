@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CustomersPage from "./pages/CustomersPage";
+import ProductsPage from "./pages/ProductsPage";
 import {
   BrowserRouter,
   Routes,
@@ -34,9 +35,10 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/customers" element={<CustomersPage />} />
+          <Route path="/products" element={<ProductsPage />} />
 
         </Route>
-        
+
 
 
 

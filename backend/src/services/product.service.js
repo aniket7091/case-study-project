@@ -64,7 +64,10 @@ const getProducts = async ({
 
     // Category filter
     if (category) {
-        query = query.eq("category", category);
+        query = query.ilike(
+            "category",
+            `%${category.trim()}%`
+        );
     }
 
     // Low stock filter
