@@ -205,7 +205,16 @@
 }
 
 .primary-btn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
+}
+
+.primary-btn span svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .secondary-btn {
@@ -237,6 +246,14 @@
 
 .hero-note span {
   color: #35a853;
+  display: flex;
+  align-items: center;
+}
+
+.hero-note span svg {
+  width: 15px;
+  height: 15px;
+  display: block;
 }
 
 
@@ -353,7 +370,13 @@
 
   color: #aaa;
 
-  font-size: 13px;
+  font-size: 16px;
+}
+
+.sidebar-item svg {
+  width: 15px;
+  height: 15px;
+  display: block;
 }
 
 .sidebar-item.active {
@@ -587,8 +610,15 @@
 
   background: #f0f0ed;
 
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 700;
+  color: #444;
+}
+
+.activity-icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
 }
 
 .activity-item strong {
@@ -729,18 +759,25 @@
 }
 
 .feature-icon {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
   background: #f0f0ed;
 
-  font-size: 18px;
+  font-size: 22px;
+  color: #222;
+}
+
+.feature-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .feature-card h3 {
@@ -1076,20 +1113,25 @@
 }
 
 .role-icon {
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 8px;
+  border-radius: 9px;
 
   background: #292929;
 
-  font-size: 11px;
+  font-size: 20px;
+  color: white;
+}
 
-  font-weight: 700;
+.role-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .role-item h3 {
@@ -1106,8 +1148,17 @@
 
 .role-item>span {
   margin-left: auto;
-
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
   color: #777;
+  font-size: 18px;
+}
+
+.role-item>span svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 
@@ -2297,8 +2348,8 @@
 }
 
 .stat-icon {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 
   display: flex;
   align-items: center;
@@ -2310,7 +2361,13 @@
 
   color: #333;
 
-  font-size: 11px;
+  font-size: 16px;
+}
+
+.stat-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .dashboard-stat-card h2 {
@@ -2504,8 +2561,8 @@
 }
 
 .quick-action-icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
 
   flex-shrink: 0;
 
@@ -2513,13 +2570,19 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   background: #f0f0ed;
 
   color: #222;
 
-  font-size: 15px;
+  font-size: 22px;
+}
+
+.quick-action-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .quick-action-card h3 {
@@ -2540,10 +2603,18 @@
 
 .quick-action-card>span {
   margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 18px;
+}
 
-  color: #999;
-
-  font-size: 15px;
+.quick-action-card>span svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 

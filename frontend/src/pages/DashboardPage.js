@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import SidebarNavigation from "../components/SidebarNavigation";
 import {
   MdDashboard, MdPeople, MdInventory2, MdWarehouse,
-  MdReceipt, MdSupervisedUserCircle, MdBarChart
+  MdReceipt, MdSupervisedUserCircle, MdBarChart,
+  MdArrowForward
 } from "react-icons/md";
 import "../App.css";
 
@@ -478,7 +479,7 @@ const DashboardPage = () => {
                 </span>
 
                 <div className="stat-icon">
-                  ◎
+                  <MdPeople />
                 </div>
               </div>
 
@@ -507,7 +508,7 @@ const DashboardPage = () => {
                 </span>
 
                 <div className="stat-icon">
-                  ◇
+                  <MdInventory2 />
                 </div>
               </div>
 
@@ -536,7 +537,7 @@ const DashboardPage = () => {
                 </span>
 
                 <div className="stat-icon">
-                  ≡
+                  <MdReceipt />
                 </div>
               </div>
 
@@ -565,7 +566,7 @@ const DashboardPage = () => {
                 </span>
 
                 <div className="stat-icon">
-                  ◉
+                  <MdSupervisedUserCircle />
                 </div>
               </div>
 
@@ -660,7 +661,7 @@ const DashboardPage = () => {
                 >
 
                   <div className="quick-action-icon">
-                    ◎
+                    <MdPeople />
                   </div>
 
                   <div>
@@ -675,7 +676,7 @@ const DashboardPage = () => {
                   </div>
 
                   <span>
-                    →
+                    <MdArrowForward />
                   </span>
 
                 </button>
@@ -695,7 +696,7 @@ const DashboardPage = () => {
                 >
 
                   <div className="quick-action-icon">
-                    ◇
+                    <MdInventory2 />
                   </div>
 
                   <div>
@@ -709,7 +710,7 @@ const DashboardPage = () => {
                   </div>
 
                   <span>
-                    →
+                    <MdArrowForward />
                   </span>
 
                 </button>
@@ -729,7 +730,7 @@ const DashboardPage = () => {
                 >
 
                   <div className="quick-action-icon">
-                    ▣
+                    <MdWarehouse />
                   </div>
 
                   <div>
@@ -763,7 +764,7 @@ const DashboardPage = () => {
                 >
 
                   <div className="quick-action-icon">
-                    ≡
+                    <MdReceipt />
                   </div>
 
                   <div>

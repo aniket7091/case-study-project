@@ -1,5 +1,21 @@
 import React, { useEffect } from "react";
 import { Link, useLocation,useNavigate } from "react-router-dom";
+import {
+  MdPeople,
+  MdInventory2,
+  MdWarehouse,
+  MdReceipt,
+  MdBarChart,
+  MdDashboard,
+  MdSupervisedUserCircle,
+  MdArrowForward,
+  MdCheckCircle,
+  MdAdminPanelSettings,
+  MdStorefront,
+  MdAccountBalance,
+  MdPersonPin,
+  MdTrendingUp,
+} from "react-icons/md";
 import "../App.css";
 
 const LandingPage = () => {
@@ -83,7 +99,7 @@ const LandingPage = () => {
 
             <button className="primary-btn" onClick={() => navigate("/login")}>
               Get Started
-              <span>→</span>
+              <span><MdArrowForward /></span>
             </button>
 
             <button className="secondary-btn" onClick={() => navigate("/login")}>
@@ -93,7 +109,7 @@ const LandingPage = () => {
           </div>
 
           <div className="hero-note">
-            <span>✓</span>
+            <span><MdCheckCircle /></span>
             Simple setup · Role-based access · Built for teams
           </div>
 
@@ -130,19 +146,19 @@ const LandingPage = () => {
                 </div>
 
                 <div className="sidebar-item active">
-                  ◉
+                  <MdDashboard />
                 </div>
 
                 <div className="sidebar-item">
-                  □
+                  <MdPeople />
                 </div>
 
                 <div className="sidebar-item">
-                  ◇
+                  <MdInventory2 />
                 </div>
 
                 <div className="sidebar-item">
-                  ≡
+                  <MdReceipt />
                 </div>
 
               </aside>
@@ -235,7 +251,7 @@ const LandingPage = () => {
 
                     <div className="activity-item">
                       <div className="activity-icon">
-                        C
+                        <MdPeople />
                       </div>
 
                       <div>
@@ -250,7 +266,7 @@ const LandingPage = () => {
 
                     <div className="activity-item">
                       <div className="activity-icon">
-                        P
+                        <MdWarehouse />
                       </div>
 
                       <div>
@@ -265,7 +281,7 @@ const LandingPage = () => {
 
                     <div className="activity-item">
                       <div className="activity-icon">
-                        S
+                        <MdReceipt />
                       </div>
 
                       <div>
@@ -345,7 +361,7 @@ const LandingPage = () => {
           <div className="feature-card large">
 
             <div className="feature-icon">
-              ◎
+              <MdPeople />
             </div>
 
             <h3>
@@ -383,7 +399,7 @@ const LandingPage = () => {
           <div className="feature-card">
 
             <div className="feature-icon">
-              ◇
+              <MdInventory2 />
             </div>
 
             <h3>
@@ -414,7 +430,7 @@ const LandingPage = () => {
           <div className="feature-card">
 
             <div className="feature-icon">
-              ≡
+              <MdReceipt />
             </div>
 
             <h3>
@@ -437,7 +453,7 @@ const LandingPage = () => {
           <div className="feature-card">
 
             <div className="feature-icon">
-              ◉
+              <MdSupervisedUserCircle />
             </div>
 
             <h3>
@@ -464,7 +480,7 @@ const LandingPage = () => {
           <div className="feature-card large">
 
             <div className="feature-icon">
-              ↗
+              <MdBarChart />
             </div>
 
             <h3>
@@ -650,7 +666,7 @@ const LandingPage = () => {
 
             <div className="role-item active">
               <div className="role-icon">
-                A
+                <MdAdminPanelSettings />
               </div>
 
               <div>
@@ -660,13 +676,13 @@ const LandingPage = () => {
                 </p>
               </div>
 
-              <span>→</span>
+              <span><MdArrowForward /></span>
             </div>
 
 
             <div className="role-item">
               <div className="role-icon">
-                S
+                <MdStorefront />
               </div>
 
               <div>
@@ -676,13 +692,13 @@ const LandingPage = () => {
                 </p>
               </div>
 
-              <span>→</span>
+              <span><MdArrowForward /></span>
             </div>
 
 
             <div className="role-item">
               <div className="role-icon">
-                W
+                <MdWarehouse />
               </div>
 
               <div>
@@ -692,13 +708,13 @@ const LandingPage = () => {
                 </p>
               </div>
 
-              <span>→</span>
+              <span><MdArrowForward /></span>
             </div>
 
 
             <div className="role-item">
               <div className="role-icon">
-                A
+                <MdAccountBalance />
               </div>
 
               <div>
@@ -708,7 +724,7 @@ const LandingPage = () => {
                 </p>
               </div>
 
-              <span>→</span>
+              <span><MdArrowForward /></span>
             </div>
 
           </div>
@@ -745,7 +761,7 @@ const LandingPage = () => {
 
           <button className="primary-btn" onClick={() => navigate("/login")}>
             Get Started
-            <span>→</span>
+            <span><MdArrowForward /></span>
           </button>
 
         </div>
